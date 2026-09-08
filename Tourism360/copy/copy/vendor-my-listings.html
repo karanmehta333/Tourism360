@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Listings | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="portal-body">
+
+  <div class="portal-layout">
+    <aside class="portal-sidebar" id="vendorSidebar"></aside>
+
+    <div class="portal-main">
+      <header class="portal-topbar">
+        <div class="portal-topbar-left">
+          <button class="sidebar-toggle-mobile" aria-label="Toggle Navigation">☰</button>
+          <div class="topbar-heading">
+            <h1>My Tourism Listings</h1>
+            <p>Manage, track approval status, edit and update your active offerings</p>
+          </div>
+        </div>
+
+        <div class="portal-topbar-right">
+          <a href="vendor-add-listing.html" class="btn btn-primary btn-sm">
+            <span>➕</span> Add New Listing
+          </a>
+        </div>
+      </header>
+
+      <main class="portal-content">
+
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title"><span>📋</span> All Created Listings</h2>
+            <div style="font-size: 0.88rem; color: #64748b;" id="listingCountLabel">Loading listings...</div>
+          </div>
+
+          <div class="portal-table-wrap">
+            <table class="portal-table">
+              <thead>
+                <tr>
+                  <th>Preview</th>
+                  <th>Listing Title</th>
+                  <th>Category</th>
+                  <th>Location</th>
+                  <th>Price</th>
+                  <th>Rating</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="myListingsTableBody">
+                <tr>
+                  <td colspan="8" style="text-align: center; color: #64748b; padding: 2.5rem;">Loading listings...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="disclaimer-banner">
+          Note: Only listings with the <strong>Published</strong> status are visible to tourists on the public Tourism 360° portal.
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div id="editListingModal" class="portal-modal-backdrop" style="display: none;">
+    <div class="portal-modal-content">
+      <div class="portal-modal-header">
+        <h3>Edit Listing</h3>
+        <button type="button" class="portal-modal-close" id="btnCloseEditModal">&times;</button>
+      </div>
+      <form id="editListingForm" class="portal-modal-body">
+        <input type="hidden" id="editListId">
+        <div class="portal-form-group" style="margin-bottom: 1rem;">
+          <label class="portal-label">Listing Title <span class="required">*</span></label>
+          <input type="text" id="editListTitle" class="portal-input" required>
+        </div>
+        <div class="portal-form-grid" style="margin-bottom: 1rem;">
+          <div class="portal-form-group">
+            <label class="portal-label">Price (₹ INR) <span class="required">*</span></label>
+            <input type="number" id="editListPrice" class="portal-input" required min="50">
+          </div>
+          <div class="portal-form-group">
+            <label class="portal-label">Price Tier</label>
+            <select id="editListPriceTier" class="portal-select">
+              <option value="budget">Budget (Under ₹1,800)</option>
+              <option value="moderate">Moderate (₹1,800 - ₹3,500)</option>
+              <option value="premium">Premium (Above ₹3,500)</option>
+            </select>
+          </div>
+        </div>
+        <div class="portal-form-group" style="margin-bottom: 1rem;">
+          <label class="portal-label">Short Description</label>
+          <input type="text" id="editListShortDesc" class="portal-input" required>
+        </div>
+        <div class="portal-form-group" style="margin-bottom: 1rem;">
+          <label class="portal-label">Contact Number</label>
+          <input type="tel" id="editListContact" class="portal-input" required>
+        </div>
+        <div class="portal-modal-footer" style="padding-left: 0; padding-right: 0; margin-top: 1.25rem;">
+          <button type="button" class="btn-action-sm btn-action-outline" id="btnCancelEditModal">Cancel</button>
+          <button type="submit" class="btn-action-sm btn-action-primary" style="padding: 0.6rem 1.25rem;">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="viewListingModal" class="portal-modal-backdrop" style="display: none;">
+    <div class="portal-modal-content">
+      <div class="portal-modal-header">
+        <h3 id="viewModalHeading">Listing Preview</h3>
+        <button type="button" class="portal-modal-close" id="btnCloseViewModal">&times;</button>
+      </div>
+      <div class="portal-modal-body" id="viewModalContent"></div>
+      <div class="portal-modal-footer">
+        <button type="button" class="btn-action-sm btn-action-outline" id="btnDismissViewModal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/vendor.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const vendor = requireVendorAuth();
+      if (!vendor) return;
+
+      renderVendorSidebar("listings");
+
+      function loadListings() {
+        const allListings = getStoredListings();
+        const myListings = allListings.filter(l => l.vendorId === vendor.id);
+
+        document.getElementById("listingCountLabel").textContent = `Showing ${myListings.length} total listings`;
+
+        const tbody = document.getElementById("myListingsTableBody");
+        if (myListings.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="8" style="text-align: center; color: #64748b; padding: 3rem 1rem;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏔️</div>
+                <strong>You haven't created any listings yet.</strong>
+                <p style="margin: 0.5rem 0 1rem 0; font-size: 0.88rem;">Start showcasing your rooms, treks, meals or tours to Uttarakhand travellers.</p>
+                <a href="vendor-add-listing.html" class="btn btn-primary btn-sm">Create First Listing</a>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = myListings.map(l => {
+          const statusClass = (l.status || "pending").toLowerCase();
+          return `
+            <tr>
+              <td>
+                <img src="${l.image || 'assets/images/nainital.jpg'}" alt="${l.title}" class="table-thumb">
+              </td>
+              <td>
+                <strong>${l.title}</strong>
+                <br><small style="color: #64748b;">${l.shortDesc ? l.shortDesc.substring(0, 50) + '...' : ''}</small>
+              </td>
+              <td><span style="font-size: 0.82rem; font-weight: 600; color: #0284c7;">${l.category}</span></td>
+              <td>📍 ${l.districtDisplay || l.district}</td>
+              <td><strong>${l.priceDisplay || ('₹' + l.price)}</strong></td>
+              <td>⭐ ${l.rating || '5.0'}</td>
+              <td><span class="badge-status ${statusClass}">${l.status}</span></td>
+              <td>
+                <div class="table-actions">
+                  <button type="button" class="btn-action-sm btn-action-outline" onclick="openViewModal('${l.id}')">View</button>
+                  <button type="button" class="btn-action-sm btn-action-primary" onclick="openEditModal('${l.id}')">Edit</button>
+                  <button type="button" class="btn-action-sm btn-action-danger" onclick="deleteListingItem('${l.id}')">Delete</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      window.deleteListingItem = function(id) {
+        if (!confirm("Are you sure you want to delete this listing?")) return;
+        let allListings = getStoredListings();
+        allListings = allListings.filter(l => l.id !== id);
+        saveStoredListings(allListings);
+        showPortalToast("Listing deleted successfully.", "info");
+        loadListings();
+      };
+
+      window.openViewModal = function(id) {
+        const allListings = getStoredListings();
+        const item = allListings.find(l => l.id === id);
+        if (!item) return;
+
+        document.getElementById("viewModalHeading").textContent = item.title;
+        document.getElementById("viewModalContent").innerHTML = `
+          <div style="border-radius: 12px; overflow: hidden; margin-bottom: 1rem; max-height: 220px;">
+            <img src="${item.image || 'assets/images/nainital.jpg'}" alt="${item.title}" style="width: 100%; height: 220px; object-fit: cover;">
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge-status ${item.status.toLowerCase()}">${item.status}</span>
+            <strong style="color: #0b1f3a; font-size: 1.15rem;">${item.priceDisplay || ('₹' + item.price)}</strong>
+          </div>
+          <p style="font-size: 0.95rem; color: #334155; line-height: 1.6; margin-bottom: 1rem;">
+            ${item.description || item.shortDesc}
+          </p>
+          <div style="background: #f8fafc; padding: 1rem; border-radius: 10px; font-size: 0.88rem; border: 1px solid #e2e8f0;">
+            <div style="margin-bottom: 0.35rem;"><strong>Category:</strong> ${item.category}</div>
+            <div style="margin-bottom: 0.35rem;"><strong>Location:</strong> 📍 ${item.districtDisplay || item.district}, Uttarakhand</div>
+            <div style="margin-bottom: 0.35rem;"><strong>Contact:</strong> 📞 ${item.contact || vendor.phone}</div>
+            <div><strong>Best Time:</strong> ☀️ ${item.bestTime || 'All Year'}</div>
+          </div>
+        `;
+        document.getElementById("viewListingModal").style.display = "flex";
+      };
+
+      window.openEditModal = function(id) {
+        const allListings = getStoredListings();
+        const item = allListings.find(l => l.id === id);
+        if (!item) return;
+
+        document.getElementById("editListId").value = item.id;
+        document.getElementById("editListTitle").value = item.title;
+        document.getElementById("editListPrice").value = item.price;
+        document.getElementById("editListPriceTier").value = item.priceTier || "moderate";
+        document.getElementById("editListShortDesc").value = item.shortDesc || "";
+        document.getElementById("editListContact").value = item.contact || vendor.phone || "";
+
+        document.getElementById("editListingModal").style.display = "flex";
+      };
+
+      document.getElementById("editListingForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const id = document.getElementById("editListId").value;
+        const title = document.getElementById("editListTitle").value.trim();
+        const price = document.getElementById("editListPrice").value.trim();
+        const priceTier = document.getElementById("editListPriceTier").value;
+        const shortDesc = document.getElementById("editListShortDesc").value.trim();
+        const contact = document.getElementById("editListContact").value.trim();
+
+        const allListings = getStoredListings();
+        const item = allListings.find(l => l.id === id);
+        if (item) {
+          item.title = title;
+          item.price = price;
+          item.priceTier = priceTier;
+          item.shortDesc = shortDesc;
+          item.contact = contact;
+
+          let unit = "night";
+          if (item.category.includes("Guide") || item.category.includes("Trek")) unit = "person";
+          if (item.category === "Restaurant") unit = "thali";
+          item.priceDisplay = "₹" + parseInt(price).toLocaleString("en-IN") + " / " + unit;
+
+          saveStoredListings(allListings);
+          showPortalToast("Listing updated successfully.", "success");
+          document.getElementById("editListingModal").style.display = "none";
+          loadListings();
+        }
+      });
+
+      document.getElementById("btnCloseEditModal").addEventListener("click", () => document.getElementById("editListingModal").style.display = "none");
+      document.getElementById("btnCancelEditModal").addEventListener("click", () => document.getElementById("editListingModal").style.display = "none");
+      document.getElementById("btnCloseViewModal").addEventListener("click", () => document.getElementById("viewListingModal").style.display = "none");
+      document.getElementById("btnDismissViewModal").addEventListener("click", () => document.getElementById("viewListingModal").style.display = "none");
+
+      loadListings();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Tourist Dashboard | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="portal-body">
+
+  <header class="site-header" style="position: relative; background: #0b1f3a;">
+    <div class="header-container">
+      <a href="index.html" class="navbar-brand">
+        <div class="brand-logo-icon">
+          <img src="assets/icons/logo.svg" alt="Tourism 360 Logo" width="36" height="36">
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-name">TOURISM <span style="color: #38bdf8;">360°</span></span>
+          <span class="brand-tagline">Traveller Hub</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <div class="nav-scroll-wrapper">
+          <button type="button" class="nav-scroll-btn nav-scroll-left" aria-label="Scroll navigation left">&#8249;</button>
+          <ul class="nav-links">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="destinations.html">Destinations</a></li>
+            <li class="nav-item"><a href="hotels.html">Hotels & Stays</a></li>
+            <li class="nav-item"><a href="experiences.html">Experiences</a></li>
+            <li class="nav-item"><a href="food.html">Local Food</a></li>
+            <li class="nav-item"><a href="trip-planner.html">Trip Planner</a></li>
+          </ul>
+          <button type="button" class="nav-scroll-btn nav-scroll-right" aria-label="Scroll navigation right">&#8250;</button>
+        </div>
+        <div class="nav-actions">
+          <button type="button" class="btn btn-outline-white btn-sm" id="btnUserLogoutTop" onclick="handleUserLogout()">Log Out</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="portal-content" style="max-width: 1200px; margin: 0 auto; width: 100%;">
+    
+    <div class="completion-banner" style="margin-top: 1.5rem; background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);">
+      <div class="completion-info">
+        <h2 id="userWelcomeHeading" style="font-size: 1.5rem; margin-bottom: 0.35rem; color: #ffffff;">Welcome, Traveller!</h2>
+        <p id="userMetaDetails" style="margin: 0; color: #93c5fd; font-size: 0.95rem;">rahul.tourist@gmail.com • Exploring Uttarakhand</p>
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button type="button" id="btnInspectDataset" class="btn btn-secondary btn-sm" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff;">📊 View Dataset JSON</button>
+        <a href="trip-planner.html" class="btn btn-primary btn-sm">Plan New Mountain Trip &rarr;</a>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">My Bookings</div>
+          <div class="stat-value" id="userStatBookings">0</div>
+        </div>
+        <div class="stat-icon green">📅</div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Verified Stays</div>
+          <div class="stat-value">8+</div>
+        </div>
+        <div class="stat-icon blue">🏡</div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Trek Experiences</div>
+          <div class="stat-value">8+</div>
+        </div>
+        <div class="stat-icon orange">🥾</div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Backend Status</div>
+          <div class="stat-value" style="font-size: 1.15rem; color: #16a34a;">Dataset Synced</div>
+        </div>
+        <div class="stat-icon purple">🛡️</div>
+      </div>
+    </div>
+
+    <div class="panel-card">
+      <div class="panel-header">
+        <h2 class="panel-title"><span>📅</span> My Stays & Experience Reservations</h2>
+        <a href="hotels.html" class="btn-action-sm btn-action-primary">+ Browse More Stays</a>
+      </div>
+
+      <div class="portal-table-wrap">
+        <table class="portal-table">
+          <thead>
+            <tr>
+              <th>Service / Hotel / Trek</th>
+              <th>Travel Date</th>
+              <th>Guests</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="userBookingsTableBody">
+            <tr>
+              <td colspan="6" style="text-align: center; color: #64748b; padding: 2.5rem;">Loading your bookings...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel-card">
+      <div class="panel-header">
+        <h2 class="panel-title"><span>🧭</span> Quick Traveller Actions</h2>
+      </div>
+      <div class="portal-form-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <a href="trip-planner.html" style="text-decoration: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: center; color: #0b1f3a;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🗺️</div>
+          <strong style="display: block; font-size: 1rem;">Smart Trip Planner</strong>
+          <small style="color: #64748b;">Generate personalized mountain itineraries</small>
+        </a>
+        <a href="hotels.html" style="text-decoration: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: center; color: #0b1f3a;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏡</div>
+          <strong style="display: block; font-size: 1rem;">Verified Homestays</strong>
+          <small style="color: #64748b;">Direct booking with local mountain hosts</small>
+        </a>
+        <a href="experiences.html" style="text-decoration: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: center; color: #0b1f3a;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🥾</div>
+          <strong style="display: block; font-size: 1rem;">Certified Trek Guides</strong>
+          <small style="color: #64748b;">Khaliya Top, snow hikes & paragliding</small>
+        </a>
+        <a href="emergency.html" style="text-decoration: none; background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 1.25rem; text-align: center; color: #b91c1c;">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚨</div>
+          <strong style="display: block; font-size: 1rem;">Emergency & Safety</strong>
+          <small style="color: #991b1b;">Helplines, hospitals & mountain rescue</small>
+        </a>
+      </div>
+    </div>
+
+    <div class="panel-card" style="max-width: 700px;">
+      <div class="panel-header">
+        <h2 class="panel-title"><span>👤</span> Traveller Profile Details</h2>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem;">
+        <div><strong>Name:</strong> <span id="profDetailName">Rahul Verma</span></div>
+        <div><strong>Email:</strong> <span id="profDetailEmail">rahul.tourist@gmail.com</span></div>
+        <div><strong>Phone:</strong> <span id="profDetailPhone">+91 98111 22334</span></div>
+        <div><strong>Home Location:</strong> <span id="profDetailLocation">Delhi / NCR</span></div>
+        <div><strong>Interests:</strong> <span id="profDetailInterests">Alpine Treks, Heritage Homestays</span></div>
+      </div>
+      <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+        <button type="button" class="btn btn-outline-primary btn-sm" id="btnEditProfile">Edit Profile Info</button>
+        <button type="button" class="btn btn-danger btn-sm" id="btnUserLogoutBottom" onclick="handleUserLogout()" style="background: #ef4444; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">Log Out</button>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="datasetViewerModal" class="portal-modal-backdrop" style="display: none;">
+    <div class="portal-modal-content" style="max-width: 650px;">
+      <div class="portal-modal-header">
+        <h3>📊 Backend Dataset Viewer</h3>
+        <button type="button" class="portal-modal-close" id="btnCloseDatasetModal">&times;</button>
+      </div>
+      <div class="portal-modal-body">
+        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 0.75rem;">
+          Real-time serialized data from the backend database repository.
+        </p>
+        <pre id="jsonViewerContent" style="background: #0b1f3a; color: #38bdf8; padding: 1rem; border-radius: 8px; font-size: 0.75rem; max-height: 320px; overflow-y: auto; font-family: monospace; white-space: pre-wrap; word-break: break-all;"></pre>
+      </div>
+      <div class="portal-modal-footer">
+        <button type="button" class="btn btn-secondary" id="btnCloseDatasetModal2">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="editProfileModal" class="portal-modal-backdrop" style="display: none;">
+    <div class="portal-modal-content" style="max-width: 500px;">
+      <div class="portal-modal-header">
+        <h3>✏️ Edit Profile Info</h3>
+        <button type="button" class="portal-modal-close" id="btnCloseEditModal">&times;</button>
+      </div>
+      <form id="editProfileForm">
+        <div class="portal-modal-body">
+          <div class="portal-form-group" style="margin-bottom: 1rem;">
+            <label class="portal-label" for="editName">Full Name</label>
+            <input type="text" id="editName" class="portal-input" required>
+          </div>
+          <div class="portal-form-group" style="margin-bottom: 1rem;">
+            <label class="portal-label" for="editPhone">Phone Number</label>
+            <input type="tel" id="editPhone" class="portal-input" required>
+          </div>
+          <div class="portal-form-group" style="margin-bottom: 1rem;">
+            <label class="portal-label" for="editLocation">Location</label>
+            <input type="text" id="editLocation" class="portal-input">
+          </div>
+          <div class="portal-form-group">
+            <label class="portal-label" for="editInterests">Travel Interests</label>
+            <input type="text" id="editInterests" class="portal-input" placeholder="e.g. Treks, Photography, Homestays">
+          </div>
+        </div>
+        <div class="portal-modal-footer">
+          <button type="button" class="btn btn-secondary" id="btnCancelEdit">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes to Dataset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/database.js"></script>
+  <script src="js/vendor.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const user = requireUserAuth();
+      if (!user) return;
+
+      function renderUserDetails(u) {
+        document.getElementById("userWelcomeHeading").textContent = "Welcome, " + u.name + "!";
+        document.getElementById("userMetaDetails").textContent = u.email + (u.phone ? " • " + u.phone : "") + " • " + (u.location || "Uttarakhand Traveller");
+        document.getElementById("profDetailName").textContent = u.name;
+        document.getElementById("profDetailEmail").textContent = u.email;
+        document.getElementById("profDetailPhone").textContent = u.phone || "Not provided";
+        document.getElementById("profDetailLocation").textContent = u.location || "India";
+        document.getElementById("profDetailInterests").textContent = u.interests || "Alpine Treks, Heritage Stays";
+      }
+
+      renderUserDetails(user);
+
+      const allBookings = getStoredBookings();
+      const userBookings = allBookings.filter(b => 
+        (b.customerEmail && b.customerEmail.toLowerCase() === user.email.toLowerCase()) || 
+        (b.customerName && b.customerName.toLowerCase() === user.name.toLowerCase())
+      );
+
+      document.getElementById("userStatBookings").textContent = userBookings.length;
+
+      const tbody = document.getElementById("userBookingsTableBody");
+      if (userBookings.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center; color: #64748b; padding: 3rem 1rem;">
+              <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🏔️</div>
+              <strong>No active bookings found yet.</strong>
+              <p style="margin: 0.5rem 0 1rem 0; font-size: 0.88rem;">Explore authentic hotels, homestays, or alpine treks and book directly with local hosts.</p>
+              <a href="hotels.html" class="btn btn-primary btn-sm">Explore Stays</a>
+            </td>
+          </tr>
+        `;
+      } else {
+        tbody.innerHTML = userBookings.map(b => `
+          <tr>
+            <td><strong>${escapeHtml(b.listingTitle)}</strong></td>
+            <td>🗓️ ${escapeHtml(b.date)}</td>
+            <td>👥 ${b.guests} Guests</td>
+            <td><strong>${escapeHtml(b.amount)}</strong></td>
+            <td><span class="badge-status ${b.status.toLowerCase()}">${escapeHtml(b.status)}</span></td>
+            <td>
+              <button type="button" class="btn-action-sm btn-action-outline" onclick="showPortalToast('Booking ID: ' + '${b.id}' + ' is active.', 'info')">View Details</button>
+            </td>
+          </tr>
+        `).join("");
+      }
+
+      const datasetModal = document.getElementById("datasetViewerModal");
+      const jsonViewerContent = document.getElementById("jsonViewerContent");
+      const btnInspectDataset = document.getElementById("btnInspectDataset");
+      const btnCloseDatasetModal = document.getElementById("btnCloseDatasetModal");
+      const btnCloseDatasetModal2 = document.getElementById("btnCloseDatasetModal2");
+
+      if (btnInspectDataset) {
+        btnInspectDataset.addEventListener("click", function() {
+          jsonViewerContent.textContent = BackendDB.exportDatasetJSON();
+          datasetModal.style.display = "flex";
+        });
+      }
+      if (btnCloseDatasetModal) btnCloseDatasetModal.addEventListener("click", () => datasetModal.style.display = "none");
+      if (btnCloseDatasetModal2) btnCloseDatasetModal2.addEventListener("click", () => datasetModal.style.display = "none");
+
+      const editModal = document.getElementById("editProfileModal");
+      const btnEditProfile = document.getElementById("btnEditProfile");
+      const btnCloseEditModal = document.getElementById("btnCloseEditModal");
+      const btnCancelEdit = document.getElementById("btnCancelEdit");
+      const editForm = document.getElementById("editProfileForm");
+
+      if (btnEditProfile) {
+        btnEditProfile.addEventListener("click", function() {
+          const current = getCurrentUser();
+          document.getElementById("editName").value = current.name || "";
+          document.getElementById("editPhone").value = current.phone || "";
+          document.getElementById("editLocation").value = current.location || "";
+          document.getElementById("editInterests").value = current.interests || "";
+          editModal.style.display = "flex";
+        });
+      }
+
+      if (btnCloseEditModal) btnCloseEditModal.addEventListener("click", () => editModal.style.display = "none");
+      if (btnCancelEdit) btnCancelEdit.addEventListener("click", () => editModal.style.display = "none");
+
+      if (editForm) {
+        editForm.addEventListener("submit", function(e) {
+          e.preventDefault();
+          const current = getCurrentUser();
+          const updatedName = document.getElementById("editName").value.trim();
+          const updatedPhone = document.getElementById("editPhone").value.trim();
+          const updatedLocation = document.getElementById("editLocation").value.trim();
+          const updatedInterests = document.getElementById("editInterests").value.trim();
+
+          const result = BackendDB.updateUserProfile(current.id, {
+            name: updatedName,
+            phone: updatedPhone,
+            location: updatedLocation,
+            interests: updatedInterests
+          });
+
+          if (result.success) {
+            editModal.style.display = "none";
+            renderUserDetails(result.user);
+            showPortalToast("Profile details updated in backend dataset!", "success");
+          } else {
+            showPortalToast(result.message, "error");
+          }
+        });
+      }
+
+      function doLogout() {
+        handleUserLogout();
+      }
+
+      document.getElementById("btnUserLogoutTop").addEventListener("click", doLogout);
+      document.getElementById("btnUserLogoutBottom").addEventListener("click", doLogout);
+    });
+  </script>
+</body>
+</html>

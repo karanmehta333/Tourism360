@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Registration | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="auth-page-wrapper">
+
+  <div class="auth-card wide">
+    <div class="auth-header">
+      <a href="index.html" class="auth-logo">
+        <img src="assets/icons/logo.svg" alt="Tourism 360 Logo">
+        <div class="auth-logo-text">TOURISM <span>360°</span></div>
+      </a>
+      <h1>Join Tourism 360°</h1>
+      <p>Showcase your local business to travellers exploring Uttarakhand.</p>
+    </div>
+
+    <form id="vendorRegisterForm">
+      <div class="portal-form-grid">
+        <div class="portal-form-group">
+          <label class="portal-label" for="regFullName">Full Name <span class="required">*</span></label>
+          <input type="text" id="regFullName" class="portal-input" placeholder="e.g. Sunil Rawat" required>
+        </div>
+
+        <div class="portal-form-group">
+          <label class="portal-label" for="regBusinessName">Business Name <span class="required">*</span></label>
+          <input type="text" id="regBusinessName" class="portal-input" placeholder="e.g. Himalayan Pine Retreat" required>
+        </div>
+
+        <div class="portal-form-group">
+          <label class="portal-label" for="regEmail">Email Address <span class="required">*</span></label>
+          <input type="email" id="regEmail" class="portal-input" placeholder="e.g. sunil@pinehomestay.com" required>
+        </div>
+
+        <div class="portal-form-group">
+          <label class="portal-label" for="regPhone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="regPhone" class="portal-input" placeholder="e.g. +91 98765 43210" required>
+        </div>
+
+        <div class="portal-form-group">
+          <label class="portal-label" for="regPassword">Password <span class="required">*</span></label>
+          <input type="password" id="regPassword" class="portal-input" placeholder="Create a secure password" required minlength="6">
+        </div>
+
+        <div class="portal-form-group">
+          <label class="portal-label" for="regBusinessType">Business Type <span class="required">*</span></label>
+          <select id="regBusinessType" class="portal-select" required>
+            <option value="">Select Business Type</option>
+            <option value="Hotel / Homestay">Hotel / Homestay</option>
+            <option value="Local Vendor">Local Vendor / Handicraft</option>
+            <option value="Tour Guide">Tour Guide</option>
+            <option value="Trekking Guide">Trekking Guide</option>
+            <option value="Experience Provider">Experience Provider</option>
+            <option value="Restaurant">Restaurant / Local Food</option>
+            <option value="Transport Provider">Travel / Transport Provider</option>
+          </select>
+        </div>
+
+        <div class="portal-form-group">
+          <label class="portal-label" for="regDistrict">District / Region <span class="required">*</span></label>
+          <select id="regDistrict" class="portal-select" required>
+            <option value="">Select Uttarakhand District</option>
+            <option value="Nainital">Nainital</option>
+            <option value="Pithoragarh">Pithoragarh</option>
+            <option value="Bhimtal">Bhimtal</option>
+            <option value="Almora">Almora</option>
+            <option value="Mukteshwar">Mukteshwar</option>
+            <option value="Bageshwar">Bageshwar</option>
+            <option value="Dharchula">Dharchula</option>
+            <option value="Munsiyari">Munsiyari</option>
+          </select>
+        </div>
+
+        <div class="portal-form-group">
+          <label class="portal-label" for="regCity">City / Village / Town <span class="required">*</span></label>
+          <input type="text" id="regCity" class="portal-input" placeholder="e.g. Bhowali / Nainital" required>
+        </div>
+
+        <div class="portal-form-group form-group-full">
+          <label class="portal-label" for="regAddress">Business Address <span class="required">*</span></label>
+          <input type="text" id="regAddress" class="portal-input" placeholder="e.g. Upper Mall Road, Near Pine Ridge, Nainital" required>
+        </div>
+      </div>
+
+      <div style="margin-top: 1.5rem;">
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem; border-radius: 8px;">Create Business Account</button>
+      </div>
+    </form>
+
+    <div class="disclaimer-banner">
+      Demo portal for prototype purposes. Production deployment would use secure backend authentication and a database.
+    </div>
+
+    <div class="auth-footer-links">
+      Already have a business account? <a href="vendor-login.html">Sign In Here</a>
+      <div style="margin-top: 0.5rem;">
+        <a href="index.html" style="color: #64748b; font-size: 0.82rem;">&larr; Back to Tourism 360° Website</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/vendor.js"></script>
+  <script>
+    document.getElementById("vendorRegisterForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const fullName = document.getElementById("regFullName").value.trim();
+      const businessName = document.getElementById("regBusinessName").value.trim();
+      const email = document.getElementById("regEmail").value.trim().toLowerCase();
+      const phone = document.getElementById("regPhone").value.trim();
+      const password = document.getElementById("regPassword").value;
+      const businessType = document.getElementById("regBusinessType").value;
+      const district = document.getElementById("regDistrict").value;
+      const city = document.getElementById("regCity").value.trim();
+      const address = document.getElementById("regAddress").value.trim();
+
+      const vendors = getStoredVendors();
+      const existing = vendors.find(v => v.email === email);
+      if (existing) {
+        showPortalToast("An account with this email already exists. Please log in.", "error");
+        return;
+      }
+
+      const newVendor = {
+        id: "ven_" + Date.now(),
+        name: fullName,
+        businessName: businessName,
+        email: email,
+        password: password,
+        businessType: businessType,
+        district: district,
+        city: city,
+        address: address,
+        phone: phone,
+        about: "",
+        openingHours: "09:00 AM - 08:00 PM",
+        priceRange: "",
+        services: "",
+        facilities: "",
+        socialLink: "",
+        image: "assets/images/nainital.jpg",
+        status: "Approved",
+        joinedDate: new Date().toISOString().split("T")[0]
+      };
+
+      vendors.push(newVendor);
+      saveStoredVendors(vendors);
+      setCurrentVendor(newVendor);
+
+      showPortalToast("Account created successfully! Redirecting to dashboard...", "success");
+      setTimeout(() => {
+        window.location.href = "vendor-dashboard.html";
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

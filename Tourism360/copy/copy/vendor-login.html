@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Login | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="auth-page-wrapper">
+
+  <div class="auth-card">
+    <div class="auth-header">
+      <a href="index.html" class="auth-logo">
+        <img src="assets/icons/logo.svg" alt="Tourism 360 Logo">
+        <div class="auth-logo-text">TOURISM <span>360°</span></div>
+      </a>
+      <h1>Vendor Portal Login</h1>
+      <p>Manage your Uttarakhand tourism business profile and customer bookings.</p>
+    </div>
+
+    <div class="demo-credentials-box">
+      <strong>Demo Vendor Credentials:</strong>
+      Email: <code>sunil@pinehomestay.com</code><br>
+      Password: <code>password123</code>
+      <button type="button" id="btnQuickFillVendor" style="margin-top: 6px; display: block; font-size: 0.76rem; background: #0284c7; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer;">Auto Fill Demo Credentials</button>
+    </div>
+
+    <form id="vendorLoginForm">
+      <div class="portal-form-group" style="margin-bottom: 1.25rem;">
+        <label class="portal-label" for="loginEmail">Email Address</label>
+        <input type="email" id="loginEmail" class="portal-input" placeholder="e.g. sunil@pinehomestay.com" required>
+      </div>
+
+      <div class="portal-form-group" style="margin-bottom: 1.5rem;">
+        <label class="portal-label" for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" class="portal-input" placeholder="Enter your password" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem; border-radius: 8px;">Login</button>
+    </form>
+
+    <div class="disclaimer-banner">
+      Demo portal for prototype purposes. Production deployment would use secure backend authentication and a database.
+    </div>
+
+    <div class="auth-footer-links">
+      Don't have a business account? <a href="vendor-register.html">Create a Business Account</a>
+      <div style="margin-top: 0.8rem; display: flex; justify-content: space-between; font-size: 0.82rem;">
+        <a href="index.html" style="color: #64748b;">&larr; Tourist Website</a>
+        <a href="admin-login.html" style="color: #64748b;">Admin Portal &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/vendor.js"></script>
+  <script>
+    document.getElementById("btnQuickFillVendor").addEventListener("click", function() {
+      document.getElementById("loginEmail").value = "sunil@pinehomestay.com";
+      document.getElementById("loginPassword").value = "password123";
+    });
+
+    document.getElementById("vendorLoginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+      const password = document.getElementById("loginPassword").value;
+
+      const vendors = getStoredVendors();
+      const match = vendors.find(v => v.email.toLowerCase() === email && v.password === password);
+
+      if (match) {
+        setCurrentVendor(match);
+        showPortalToast("Login successful! Welcome back, " + match.name, "success");
+        setTimeout(() => {
+          window.location.href = "vendor-dashboard.html";
+        }, 800);
+      } else {
+        showPortalToast("Invalid email or password. Please check your credentials.", "error");
+      }
+    });
+  </script>
+</body>
+</html>

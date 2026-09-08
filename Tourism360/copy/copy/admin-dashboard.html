@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="portal-body">
+
+  <div class="portal-layout">
+    <aside class="portal-sidebar" style="background: #071526;">
+      <div class="sidebar-brand">
+        <a href="index.html" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none;">
+          <img src="assets/icons/logo.svg" alt="Tourism 360 Logo">
+          <div>
+            <span class="sidebar-brand-title">TOURISM <span>360°</span></span>
+            <span class="sidebar-brand-sub" style="color: #38bdf8;">Platform Admin</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="sidebar-user-card">
+        <div class="user-avatar" style="background: #0284c7;">A</div>
+        <div class="user-info">
+          <div class="user-name">Board Admin</div>
+          <span class="user-type-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Super Admin</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="sidebar-menu">
+          <li class="sidebar-item">
+            <a href="admin-dashboard.html" class="sidebar-link active">
+              <span class="sidebar-icon">🛡️</span>
+              <span>Approval Center</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="hotels.html" class="sidebar-link" target="_blank">
+              <span class="sidebar-icon">🏨</span>
+              <span>Live Hotels & Stays &rarr;</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="experiences.html" class="sidebar-link" target="_blank">
+              <span class="sidebar-icon">🥾</span>
+              <span>Live Experiences &rarr;</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="food.html" class="sidebar-link" target="_blank">
+              <span class="sidebar-icon">🍲</span>
+              <span>Live Local Food &rarr;</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="vendor-login.html" class="sidebar-link">
+              <span class="sidebar-icon">🏢</span>
+              <span>Switch to Vendor Login</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button type="button" class="btn-sidebar-logout" id="btnAdminLogout" onclick="handleAdminLogout()">
+          <span>🚪</span> Log Out Admin
+        </button>
+      </div>
+    </aside>
+
+    <div class="portal-main">
+      <header class="portal-topbar">
+        <div class="portal-topbar-left">
+          <div class="topbar-heading">
+            <h1>Platform Administration & Verification Portal</h1>
+            <p>Review and moderate Uttarakhand local vendor applications and public listings</p>
+          </div>
+        </div>
+
+        <div class="portal-topbar-right">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnAdminExportDataset" style="background: #0284c7; color: #fff; border: none;">
+            📊 Export Dataset JSON
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnAdminResetDemo">
+            Reset Demo State
+          </button>
+          <a href="index.html" class="btn btn-outline-primary btn-sm" target="_blank">
+            Visit Tourist Site &rarr;
+          </a>
+        </div>
+      </header>
+
+      <main class="portal-content">
+
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Pending Approvals</div>
+              <div class="stat-value" id="admStatPending" style="color: #b45309;">0</div>
+            </div>
+            <div class="stat-icon amber">⏳</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Total Vendors</div>
+              <div class="stat-value" id="admStatVendors">0</div>
+            </div>
+            <div class="stat-icon blue">🏢</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Total Listings</div>
+              <div class="stat-value" id="admStatListings">0</div>
+            </div>
+            <div class="stat-icon green">📋</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Published Stays</div>
+              <div class="stat-value" id="admStatHotels">0</div>
+            </div>
+            <div class="stat-icon purple">🏡</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Experiences</div>
+              <div class="stat-value" id="admStatExperiences">0</div>
+            </div>
+            <div class="stat-icon orange">🥾</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Bookings Total</div>
+              <div class="stat-value" id="admStatBookings">0</div>
+            </div>
+            <div class="stat-icon blue">📅</div>
+          </div>
+        </div>
+
+        <div class="panel-card" id="approvalSection">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <span>⚖️</span> Vendor Listing Approval Queue
+            </h2>
+            <div style="display: flex; gap: 0.5rem;">
+              <button type="button" class="btn-action-sm btn-action-primary list-tab-btn" data-filter="all">All</button>
+              <button type="button" class="btn-action-sm btn-action-outline list-tab-btn" data-filter="pending">Pending Only</button>
+              <button type="button" class="btn-action-sm btn-action-outline list-tab-btn" data-filter="published">Published</button>
+              <button type="button" class="btn-action-sm btn-action-outline list-tab-btn" data-filter="rejected">Rejected</button>
+            </div>
+          </div>
+
+          <div class="portal-table-wrap">
+            <table class="portal-table">
+              <thead>
+                <tr>
+                  <th>Thumbnail</th>
+                  <th>Listing Title</th>
+                  <th>Vendor / Business</th>
+                  <th>Category</th>
+                  <th>District</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Moderation Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminListingsTbody">
+                <tr>
+                  <td colspan="8" style="text-align: center; color: #64748b; padding: 2.5rem;">Loading listings...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title"><span>👥</span> Registered Tourism Vendors</h2>
+          </div>
+
+          <div class="portal-table-wrap">
+            <table class="portal-table">
+              <thead>
+                <tr>
+                  <th>Owner Name</th>
+                  <th>Business Name</th>
+                  <th>Business Type</th>
+                  <th>District / Location</th>
+                  <th>Contact Info</th>
+                  <th>Account Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminVendorsTbody">
+                <tr>
+                  <td colspan="7" style="text-align: center; color: #64748b; padding: 2.5rem;">Loading vendors...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="disclaimer-banner">
+          Admin Moderation Workflow: Approving a pending listing immediately reflects it on the tourist side (Hotels, Experiences, Local Food).
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <div id="adminViewModal" class="portal-modal-backdrop" style="display: none;">
+    <div class="portal-modal-content">
+      <div class="portal-modal-header">
+        <h3 id="admViewTitle">Listing Preview</h3>
+        <button type="button" class="portal-modal-close" id="btnAdmCloseView">&times;</button>
+      </div>
+      <div class="portal-modal-body" id="admViewBody"></div>
+      <div class="portal-modal-footer">
+        <button type="button" class="btn-action-sm btn-action-outline" id="btnAdmDismiss">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/database.js"></script>
+  <script src="js/vendor.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const admin = requireAdminAuth();
+      if (!admin) return;
+
+      let currentListingFilter = "all";
+
+      function refreshAdminDashboard() {
+        const vendors = getStoredVendors();
+        const listings = getStoredListings();
+        const bookings = getStoredBookings();
+        const reviews = getStoredReviews();
+
+        const pendingListings = listings.filter(l => (l.status || "").toLowerCase() === "pending");
+        const hotels = listings.filter(l => (l.category || "").toLowerCase().includes("hotel") || (l.category || "").toLowerCase().includes("homestay"));
+        const experiences = listings.filter(l => (l.category || "").toLowerCase().includes("experience") || (l.category || "").toLowerCase().includes("guide") || (l.category || "").toLowerCase().includes("trek"));
+
+        document.getElementById("admStatPending").textContent = pendingListings.length;
+        document.getElementById("admStatVendors").textContent = vendors.length;
+        document.getElementById("admStatListings").textContent = listings.length;
+        document.getElementById("admStatHotels").textContent = hotels.length;
+        document.getElementById("admStatExperiences").textContent = experiences.length;
+        document.getElementById("admStatBookings").textContent = bookings.length;
+
+        renderAdminListings();
+        renderAdminVendors();
+      }
+
+      function renderAdminListings() {
+        const listings = getStoredListings();
+        let filtered = listings;
+        if (currentListingFilter !== "all") {
+          filtered = listings.filter(l => (l.status || "").toLowerCase() === currentListingFilter);
+        }
+
+        const tbody = document.getElementById("adminListingsTbody");
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #64748b; padding: 2rem;">No listings match "${currentListingFilter}" filter.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(l => {
+          const statusLower = (l.status || "pending").toLowerCase();
+          const isPending = statusLower === "pending";
+          const isPublished = statusLower === "published" || statusLower === "approved";
+
+          return `
+            <tr>
+              <td>
+                <img src="${l.image || 'assets/images/nainital.jpg'}" alt="${l.title}" class="table-thumb">
+              </td>
+              <td>
+                <strong>${l.title}</strong>
+                <br><small style="color: #64748b;">${l.shortDesc ? l.shortDesc.substring(0, 45) + '...' : ''}</small>
+              </td>
+              <td>
+                <strong>${l.businessName || 'Local Business'}</strong>
+                <br><small style="color: #64748b;">${l.vendorName || ''}</small>
+              </td>
+              <td><span style="font-size: 0.82rem; font-weight: 600; color: #0284c7;">${l.category}</span></td>
+              <td>📍 ${l.districtDisplay || l.district}</td>
+              <td><strong>${l.priceDisplay || ('₹' + l.price)}</strong></td>
+              <td><span class="badge-status ${statusLower}">${l.status}</span></td>
+              <td>
+                <div class="table-actions">
+                  <button type="button" class="btn-action-sm btn-action-outline" onclick="adminPreviewListing('${l.id}')">View</button>
+                  ${!isPublished ? `<button type="button" class="btn-action-sm btn-action-success" onclick="adminSetStatus('${l.id}', 'Published')">✓ Approve</button>` : ''}
+                  ${statusLower !== 'rejected' ? `<button type="button" class="btn-action-sm btn-action-danger" onclick="adminSetStatus('${l.id}', 'Rejected')">✕ Reject</button>` : ''}
+                  <button type="button" class="btn-action-sm btn-action-outline" onclick="adminDeleteListing('${l.id}')">🗑️</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      function renderAdminVendors() {
+        const vendors = getStoredVendors();
+        const tbody = document.getElementById("adminVendorsTbody");
+
+        tbody.innerHTML = vendors.map(v => {
+          const statusLower = (v.status || "approved").toLowerCase();
+          return `
+            <tr>
+              <td><strong>${v.name}</strong></td>
+              <td><strong>${v.businessName}</strong></td>
+              <td><span style="color: #0284c7; font-weight: 600; font-size: 0.85rem;">${v.businessType}</span></td>
+              <td>📍 ${v.district || 'Uttarakhand'}</td>
+              <td>
+                <div style="font-size: 0.82rem;">📞 ${v.phone || 'N/A'}</div>
+                <div style="font-size: 0.82rem; color: #64748b;">✉️ ${v.email}</div>
+              </td>
+              <td><span class="badge-status ${statusLower}">${v.status || 'Approved'}</span></td>
+              <td>
+                <div class="table-actions">
+                  ${v.status === 'Suspended' ? `
+                    <button type="button" class="btn-action-sm btn-action-success" onclick="adminSetVendorStatus('${v.id}', 'Approved')">Activate</button>
+                  ` : `
+                    <button type="button" class="btn-action-sm btn-action-outline" onclick="adminSetVendorStatus('${v.id}', 'Suspended')">Suspend</button>
+                  `}
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      window.adminSetStatus = function(id, newStatus) {
+        const listings = getStoredListings();
+        const item = listings.find(l => l.id === id);
+        if (item) {
+          item.status = newStatus;
+          saveStoredListings(listings);
+          showPortalToast(`Listing "${item.title}" is now ${newStatus}!`, "success");
+          refreshAdminDashboard();
+        }
+      };
+
+      window.adminDeleteListing = function(id) {
+        if (!confirm("Permanently delete this listing from platform?")) return;
+        let listings = getStoredListings();
+        listings = listings.filter(l => l.id !== id);
+        saveStoredListings(listings);
+        showPortalToast("Listing permanently removed.", "info");
+        refreshAdminDashboard();
+      };
+
+      window.adminSetVendorStatus = function(id, status) {
+        const vendors = getStoredVendors();
+        const v = vendors.find(item => item.id === id);
+        if (v) {
+          v.status = status;
+          saveStoredVendors(vendors);
+          showPortalToast(`Vendor account updated to ${status}.`, "info");
+          refreshAdminDashboard();
+        }
+      };
+
+      window.adminPreviewListing = function(id) {
+        const listings = getStoredListings();
+        const item = listings.find(l => l.id === id);
+        if (!item) return;
+
+        document.getElementById("admViewTitle").textContent = item.title;
+        document.getElementById("admViewBody").innerHTML = `
+          <div style="border-radius: 12px; overflow: hidden; margin-bottom: 1rem; max-height: 220px;">
+            <img src="${item.image || 'assets/images/nainital.jpg'}" alt="${item.title}" style="width: 100%; height: 220px; object-fit: cover;">
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <span class="badge-status ${item.status.toLowerCase()}">${item.status}</span>
+            <strong style="color: #0b1f3a; font-size: 1.15rem;">${item.priceDisplay || ('₹' + item.price)}</strong>
+          </div>
+          <p style="font-size: 0.95rem; color: #334155; line-height: 1.6; margin-bottom: 1rem;">
+            ${item.description || item.shortDesc}
+          </p>
+          <div style="background: #f8fafc; padding: 1rem; border-radius: 10px; font-size: 0.88rem; border: 1px solid #e2e8f0;">
+            <div style="margin-bottom: 0.35rem;"><strong>Vendor:</strong> ${item.businessName} (${item.vendorName})</div>
+            <div style="margin-bottom: 0.35rem;"><strong>Category:</strong> ${item.category}</div>
+            <div style="margin-bottom: 0.35rem;"><strong>Location:</strong> 📍 ${item.districtDisplay || item.district}, Uttarakhand</div>
+            <div style="margin-bottom: 0.35rem;"><strong>Contact:</strong> 📞 ${item.contact}</div>
+            <div><strong>Best Time:</strong> ☀️ ${item.bestTime || 'All Year'}</div>
+          </div>
+        `;
+        document.getElementById("adminViewModal").style.display = "flex";
+      };
+
+      document.querySelectorAll(".list-tab-btn").forEach(btn => {
+        btn.addEventListener("click", function() {
+          document.querySelectorAll(".list-tab-btn").forEach(b => {
+            b.classList.remove("btn-action-primary");
+            b.classList.add("btn-action-outline");
+          });
+          this.classList.remove("btn-action-outline");
+          this.classList.add("btn-action-primary");
+          currentListingFilter = this.getAttribute("data-filter");
+          renderAdminListings();
+        });
+      });
+
+      document.getElementById("btnAdmCloseView").addEventListener("click", () => document.getElementById("adminViewModal").style.display = "none");
+      document.getElementById("btnAdmDismiss").addEventListener("click", () => document.getElementById("adminViewModal").style.display = "none");
+
+      document.getElementById("btnAdminResetDemo").addEventListener("click", function() {
+        if (confirm("Reset all platform data to standard initial state?")) {
+          resetDemoData();
+        }
+      });
+
+      document.getElementById("btnAdminLogout").addEventListener("click", function() {
+        setCurrentAdmin(null);
+        window.location.href = "admin-login.html";
+      });
+
+      const btnAdminExport = document.getElementById("btnAdminExportDataset");
+      if (btnAdminExport) {
+        btnAdminExport.addEventListener("click", function() {
+          const jsonStr = BackendDB.exportDatasetJSON();
+          const blob = new Blob([jsonStr], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "tourism360_dataset_export.json";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          showPortalToast("Dataset exported and downloaded successfully!", "success");
+        });
+      }
+
+      refreshAdminDashboard();
+    });
+  </script>
+</body>
+</html>

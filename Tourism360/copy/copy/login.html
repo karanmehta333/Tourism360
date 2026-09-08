@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login & Sign Up | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="auth-page-wrapper">
+
+  <div class="auth-card" style="max-width: 580px;">
+    <div class="auth-header">
+      <a href="index.html" class="auth-logo">
+        <img src="assets/icons/logo.svg" alt="Tourism 360 Logo">
+        <div class="auth-logo-text">TOURISM <span>360°</span></div>
+      </a>
+      <h1 id="authMainTitle">Traveller Access Portal</h1>
+      <p id="authSubtitle">Please sign in or create an account to explore Uttarakhand</p>
+    </div>
+
+    <div style="display: flex; background: #f1f5f9; padding: 4px; border-radius: 10px; margin-bottom: 1.25rem;">
+      <button type="button" id="tabBtnRegister" class="btn" style="flex: 1; padding: 0.65rem; border-radius: 8px; font-weight: 700; font-size: 0.9rem; background: #ffffff; color: #0b1f3a; border: none; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.06); transition: all 0.2s ease;">
+        1. Sign Up (New User)
+      </button>
+      <button type="button" id="tabBtnLogin" class="btn" style="flex: 1; padding: 0.65rem; border-radius: 8px; font-weight: 700; font-size: 0.9rem; background: transparent; color: #64748b; border: none; cursor: pointer; transition: all 0.2s ease;">
+        2. Log In (Existing User)
+      </button>
+    </div>
+
+    <div class="demo-credentials-box" id="demoUserBox" style="display: none;">
+      <strong>Demo Tourist Credentials:</strong>
+      Email: <code>rahul.tourist@gmail.com</code><br>
+      Password: <code>tourist123</code>
+      <button type="button" id="btnQuickFillTourist" style="margin-top: 6px; display: block; font-size: 0.76rem; background: #0284c7; color: #fff; border: none; padding: 3px 8px; border-radius: 4px; cursor: pointer;">Auto Fill Tourist Credentials</button>
+    </div>
+
+    <form id="userRegisterForm">
+      <div class="portal-form-group" style="margin-bottom: 1rem;">
+        <label class="portal-label" for="uRegName">Full Name <span class="required">*</span></label>
+        <input type="text" id="uRegName" class="portal-input" placeholder="e.g. Rahul Verma" required>
+      </div>
+
+      <div class="portal-form-group" style="margin-bottom: 1rem;">
+        <label class="portal-label" for="uRegEmail">Email Address <span class="required">*</span></label>
+        <input type="email" id="uRegEmail" class="portal-input" placeholder="e.g. rahul.verma@example.com" required>
+      </div>
+
+      <div class="portal-form-grid" style="margin-bottom: 1rem;">
+        <div class="portal-form-group">
+          <label class="portal-label" for="uRegPhone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="uRegPhone" class="portal-input" placeholder="e.g. +91 98765 43210" required>
+        </div>
+        <div class="portal-form-group">
+          <label class="portal-label" for="uRegCity">Home City / State</label>
+          <input type="text" id="uRegCity" class="portal-input" placeholder="e.g. Delhi / Dehradun">
+        </div>
+      </div>
+
+      <div class="portal-form-group" style="margin-bottom: 1.5rem;">
+        <label class="portal-label" for="uRegPassword">Create Password <span class="required">*</span></label>
+        <input type="password" id="uRegPassword" class="portal-input" placeholder="Choose a password (min. 6 characters)" required minlength="6">
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem; border-radius: 8px;">
+        Create Account & Enter Website &rarr;
+      </button>
+    </form>
+
+    <form id="userLoginForm" style="display: none;">
+      <div class="portal-form-group" style="margin-bottom: 1.25rem;">
+        <label class="portal-label" for="uLoginEmail">Email Address <span class="required">*</span></label>
+        <input type="email" id="uLoginEmail" class="portal-input" placeholder="e.g. rahul.tourist@gmail.com" required>
+      </div>
+
+      <div class="portal-form-group" style="margin-bottom: 1.5rem;">
+        <label class="portal-label" for="uLoginPassword">Password <span class="required">*</span></label>
+        <input type="password" id="uLoginPassword" class="portal-input" placeholder="Enter your password" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem; border-radius: 8px;">
+        Log In & Enter Website &rarr;
+      </button>
+    </form>
+
+    <div style="margin-top: 1rem; padding: 0.75rem; background: #e0f2fe; border-radius: 8px; font-size: 0.82rem; color: #0369a1; display: flex; justify-content: space-between; align-items: center;">
+      <span><strong>Live Dataset Active:</strong> User profiles stored in backend dataset.</span>
+      <button type="button" id="btnViewDataset" style="background: #0284c7; color: #ffffff; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; cursor: pointer;">Inspect Dataset JSON</button>
+    </div>
+
+    <div class="disclaimer-banner" style="margin-top: 0.75rem;">
+      Live Server Gateway: Authenticating will grant direct access to the Home Page & booking features.
+    </div>
+
+    <div class="auth-footer-links">
+      <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-top: 0.5rem;">
+        <a href="index.html?guest=true" style="color: #64748b;">Explore as Guest &rarr;</a>
+        <a href="vendor-login.html" style="color: #0284c7; font-weight: 700;">Vendor / Hotel Owner Portal &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="datasetModal" class="portal-modal-backdrop" style="display: none;">
+    <div class="portal-modal-content" style="max-width: 650px;">
+      <div class="portal-modal-header">
+        <h3>📊 Backend Users & Activity Dataset</h3>
+        <button type="button" class="portal-modal-close" id="btnCloseDataset">&times;</button>
+      </div>
+      <div class="portal-modal-body">
+        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 0.75rem;">
+          Raw JSON data currently persisted in the backend engine (`data/users_dataset.json` / `t360_users`).
+        </p>
+        <pre id="datasetJsonViewer" style="background: #0b1f3a; color: #38bdf8; padding: 1rem; border-radius: 8px; font-size: 0.75rem; max-height: 320px; overflow-y: auto; font-family: monospace; white-space: pre-wrap; word-break: break-all;"></pre>
+      </div>
+      <div class="portal-modal-footer">
+        <button type="button" class="btn btn-secondary" id="btnCloseDataset2">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/database.js"></script>
+  <script src="js/vendor.js"></script>
+  <script>
+    const tabRegister = document.getElementById("tabBtnRegister");
+    const tabLogin = document.getElementById("tabBtnLogin");
+    const formRegister = document.getElementById("userRegisterForm");
+    const formLogin = document.getElementById("userLoginForm");
+    const demoBox = document.getElementById("demoUserBox");
+
+    function showRegisterTab() {
+      tabRegister.style.background = "#ffffff";
+      tabRegister.style.color = "#0b1f3a";
+      tabRegister.style.boxShadow = "0 2px 6px rgba(0,0,0,0.06)";
+
+      tabLogin.style.background = "transparent";
+      tabLogin.style.color = "#64748b";
+      tabLogin.style.boxShadow = "none";
+
+      formRegister.style.display = "block";
+      formLogin.style.display = "none";
+      demoBox.style.display = "none";
+    }
+
+    function showLoginTab() {
+      tabLogin.style.background = "#ffffff";
+      tabLogin.style.color = "#0b1f3a";
+      tabLogin.style.boxShadow = "0 2px 6px rgba(0,0,0,0.06)";
+
+      tabRegister.style.background = "transparent";
+      tabRegister.style.color = "#64748b";
+      tabRegister.style.boxShadow = "none";
+
+      formRegister.style.display = "none";
+      formLogin.style.display = "block";
+      demoBox.style.display = "block";
+    }
+
+    tabRegister.addEventListener("click", showRegisterTab);
+    tabLogin.addEventListener("click", showLoginTab);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("tab") === "login") {
+      showLoginTab();
+    }
+
+    document.getElementById("btnQuickFillTourist").addEventListener("click", function() {
+      document.getElementById("uLoginEmail").value = "rahul.tourist@gmail.com";
+      document.getElementById("uLoginPassword").value = "tourist123";
+    });
+
+    const datasetModal = document.getElementById("datasetModal");
+    const datasetJsonViewer = document.getElementById("datasetJsonViewer");
+    const btnViewDataset = document.getElementById("btnViewDataset");
+    const btnCloseDataset = document.getElementById("btnCloseDataset");
+    const btnCloseDataset2 = document.getElementById("btnCloseDataset2");
+
+    if (btnViewDataset) {
+      btnViewDataset.addEventListener("click", function() {
+        datasetJsonViewer.textContent = BackendDB.exportDatasetJSON();
+        datasetModal.style.display = "flex";
+      });
+    }
+
+    if (btnCloseDataset) btnCloseDataset.addEventListener("click", () => datasetModal.style.display = "none");
+    if (btnCloseDataset2) btnCloseDataset2.addEventListener("click", () => datasetModal.style.display = "none");
+
+    formRegister.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("uRegName").value.trim();
+      const email = document.getElementById("uRegEmail").value.trim();
+      const phone = document.getElementById("uRegPhone").value.trim();
+      const city = document.getElementById("uRegCity").value.trim();
+      const password = document.getElementById("uRegPassword").value;
+
+      const result = BackendDB.registerUser({
+        name: name,
+        email: email,
+        phone: phone,
+        location: city,
+        password: password
+      });
+
+      if (!result.success) {
+        showPortalToast(result.message, "error");
+        if (result.message.includes("already exists")) {
+          showLoginTab();
+          document.getElementById("uLoginEmail").value = email;
+        }
+        return;
+      }
+
+      showPortalToast("Account created in backend dataset! Redirecting to Home Page...", "success");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 900);
+    });
+
+    formLogin.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById("uLoginEmail").value.trim();
+      const password = document.getElementById("uLoginPassword").value;
+
+      const result = BackendDB.loginUser(email, password);
+
+      if (result.success) {
+        showPortalToast("Login successful! Redirecting to Home Page, " + result.user.name, "success");
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 800);
+      } else {
+        showPortalToast(result.message, "error");
+      }
+    });
+  </script>
+</body>
+</html>

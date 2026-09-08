@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uttarakhand Experiences & Adventures | Tourism 360</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="navbar-brand" aria-label="Tourism 360° Home">
+        <div class="brand-logo-icon">
+          <img src="assets/icons/logo.svg" alt="Tourism 360° Logo" width="36" height="36">
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-name">TOURISM <span>360°</span></span>
+          <span class="brand-tagline">Explore More. Experience More.</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="hamburger-box">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <div class="nav-scroll-wrapper">
+          <button type="button" class="nav-scroll-btn nav-scroll-left" aria-label="Scroll navigation left">&#8249;</button>
+          <ul class="nav-links">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="destinations.html">Destinations</a></li>
+            <li class="nav-item"><a href="hotels.html">Hotels & Stays</a></li>
+            <li class="nav-item"><a href="experiences.html" class="active">Experiences</a></li>
+            <li class="nav-item"><a href="food.html">Local Food</a></li>
+            <li class="nav-item"><a href="trip-planner.html">Trip Planner</a></li>
+            <li class="nav-item"><a href="travel-guide.html">Travel Guide</a></li>
+            <li class="nav-item"><a href="about.html">About</a></li>
+          </ul>
+          <button type="button" class="nav-scroll-btn nav-scroll-right" aria-label="Scroll navigation right">&#8250;</button>
+        </div>
+        <div class="nav-actions">
+          <a href="login.html" class="nav-btn-auth" id="navAuthLink">🔑 Login / Sign In</a>
+          <a href="vendor-login.html" class="nav-btn-partner">Partner With Us</a>
+          <a href="contact.html" class="nav-btn-contact">Contact</a>
+          <a href="emergency.html" class="nav-btn-emergency">🚨 Emergency</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-wrapper hero-experiences">
+      <div class="container hero-content">
+        <span class="hero-badge">Adventure & Mountain Culture</span>
+        <h1 class="hero-title">Curated Himalayan Experiences</h1>
+        <p class="hero-subtitle">
+          From exhilarating high-altitude alpine summits and paragliding over valley lakes to tranquil village craft walks and stargazing beneath unpolluted skies.
+        </p>
+      </div>
+
+      <div class="mountain-layer"></div>
+      <div class="mountain-divider fill-light">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,90 350,-40 500,60 C650,140 900,10 1200,40 L1200,120 L0,120 Z"></path>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section-padding bg-light">
+      <div class="container">
+        
+        <div class="filter-bar">
+          <div class="filter-pills" role="tablist">
+            <button type="button" class="filter-btn exp-filter-btn active" data-filter="all">All Experiences (8)</button>
+            <button type="button" class="filter-btn exp-filter-btn" data-filter="trek">Trekking & Hiking</button>
+            <button type="button" class="filter-btn exp-filter-btn" data-filter="adventure">Air & Water Adventures</button>
+            <button type="button" class="filter-btn exp-filter-btn" data-filter="nature">Nature & Wildlife</button>
+            <button type="button" class="filter-btn exp-filter-btn" data-filter="culture">Culture & Village Crafts</button>
+          </div>
+        </div>
+
+        <div id="expCountDisplay" style="margin-bottom: 2rem; font-weight: 700; color: var(--primary-dark); font-size: 1rem;">
+          Showing 8 experiences
+        </div>
+
+        <div class="card-grid-3" id="experienceCardList">
+
+          <article class="tourism-card experience-item-card" data-category="trek nature">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🥾 Alpine Trek</span>
+              <span class="card-tag-right">Difficulty: Moderate</span>
+              <img src="assets/images/munsiyari.jpg" alt="Khaliya Top Alpine Summit Hike Munsiyari" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange); display: block; margin-bottom: 0.3rem;">📍 Munsiyari • 6 km Trail</span>
+              <h3 class="card-title">Khaliya Top Alpine Summit Hike</h3>
+              <p class="card-description">
+                Climb through blooming rhododendron canopies to expansive alpine meadows (bugyals) rewarding hikers with a front-row 360-degree panorama of Panchachuli and Nanda Devi peaks.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 1-2 Days</span>
+                <span class="card-meta-item">🏕️ High Camp Options</span>
+                <span class="card-meta-item">❄️ Snow Trekking</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Khaliya Top Trek: Certified local guides available at Balati Basecamp.', 'info')">Explore Details &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card experience-item-card" data-category="adventure">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🪂 Aerial Sport</span>
+              <span class="card-tag-right">Difficulty: Easy (Tandem)</span>
+              <img src="assets/images/bhimtal.jpg" alt="Naukuchiatal Tandem Paragliding Bhimtal" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange); display: block; margin-bottom: 0.3rem;">📍 Naukuchiatal / Bhimtal Valley</span>
+              <h3 class="card-title">Naukuchiatal Tandem Paragliding</h3>
+              <p class="card-description">
+                Soar like a Himalayan eagle with certified pilots over emerald nine-cornered lakes, pine ridges, and terraced mountain valleys. Includes GoPro HD flight video.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 15 - 30 Min Flight</span>
+                <span class="card-meta-item">📹 HD Video</span>
+                <span class="card-meta-item">🛡️ Full Safety Gear</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Paragliding: Operates daily subject to wind conditions.', 'info')">Explore Details &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card experience-item-card" data-category="adventure">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🧗 Rock Adventure</span>
+              <span class="card-tag-right">Difficulty: Moderate</span>
+              <img src="assets/images/mukteshwar.jpg" alt="Chauli Ki Jali Rock Climbing Mukteshwar" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange); display: block; margin-bottom: 0.3rem;">📍 Mukteshwar Cliffs</span>
+              <h3 class="card-title">Chauli Ki Jali Rock Climbing</h3>
+              <p class="card-description">
+                Experience the thrill of rappelling down sheer natural granite cliffs and soaring on a 300-foot valley zipline with uninterrupted views of the Trishul massif.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 2 - 3 Hours</span>
+                <span class="card-meta-item">👨‍🏫 IMF Certified Guide</span>
+                <span class="card-meta-item">🪢 Rappelling</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Chauli Ki Jali: Adventure equipment provided on site.', 'info')">Explore Details &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card experience-item-card" data-category="nature">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🦅 Birdwatching</span>
+              <span class="card-tag-right">Difficulty: Easy</span>
+              <img src="assets/images/nainital.jpg" alt="Pangot Oak Forest Birding Trail Nainital" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange); display: block; margin-bottom: 0.3rem;">📍 Pangot / Nainital Oak Woods</span>
+              <h3 class="card-title">Pangot Oak Forest Birding Trail</h3>
+              <p class="card-description">
+                Walk through tranquil, mist-shrouded oak and rhododendron forests boasting over 250 species of birds including cheer pheasants, koklass, and Himalayan griffons.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ Half Day</span>
+                <span class="card-meta-item">🔭 Spotting Scopes</span>
+                <span class="card-meta-item">📷 Nature Photography</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Pangot Birding: Best in early morning 6:00 AM - 9:30 AM.', 'info')">Explore Details &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card experience-item-card" data-category="adventure nature">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🛶 Water & Stars</span>
+              <span class="card-tag-right">Difficulty: Easy</span>
+              <img src="assets/images/bhimtal-lake.jpg" alt="Sattal Kayaking & Stargazing Camp" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange); display: block; margin-bottom: 0.3rem;">📍 Sattal Lake Cluster</span>
+              <h3 class="card-title">Sattal Kayaking & Stargazing Camp</h3>
+              <p class="card-description">
+                Paddle across seven interconnected freshwater lakes surrounded by pristine wilderness, followed by night camping and telescope astronomy sessions under dark mountain skies.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ Overnight (24h)</span>
+                <span class="card-meta-item">🛶 Kayak & Lifevest</span>
+                <span class="card-meta-item">🌌 Telescope Viewing</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Sattal Camping: Eco-certified zero-waste campsite.', 'info')">Explore Details &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card experience-item-card" data-category="culture">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🧶 Village Craft</span>
+              <span class="card-tag-right">Difficulty: Easy</span>
+              <img src="assets/images/munsiyari-village.jpg" alt="Darkot Handloom Weavers Tour Munsiyari" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange); display: block; margin-bottom: 0.3rem;">📍 Darkot Village, Munsiyari</span>
+              <h3 class="card-title">Darkot Handloom Weavers Tour</h3>
+              <p class="card-description">
+                Meet indigenous Shauka women artisans, observe ancestral spinning wheel methods, learn how fine sheep wool and Pashmina are processed, and buy directly from makers.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 2 - 3 Hours</span>
+                <span class="card-meta-item">☕ Pahadi Herbal Tea</span>
+                <span class="card-meta-item">🧤 Authentic Handloom</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Darkot Handlooms: 100% of purchase proceeds support local women weavers.', 'info')">Explore Details &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card experience-item-card" data-category="trek">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🧊 Glacier Expedition</span>
+              <span class="card-tag-right">Difficulty: Moderate - Strenuous</span>
+              <img src="assets/images/bageshwar.jpg" alt="Pindari Glacier 6-Day Expedition Bageshwar" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange); display: block; margin-bottom: 0.3rem;">📍 Bageshwar / Song Base</span>
+              <h3 class="card-title">Pindari Glacier 6-Day Expedition</h3>
+              <p class="card-description">
+                Traverse hanging wooden bridges over roaring gorges, traditional stone villages of Khati, and high-altitude moraines right up to Zero Point beneath Nanda Devi Sanctuary.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 6 Days</span>
+                <span class="card-meta-item">⛺ Alpine Tents & Food</span>
+                <span class="card-meta-item">📜 Forest Trek Permit</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Pindari Glacier: Trek seasons are May-June & Sept-October.', 'info')">Explore Details &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card experience-item-card" data-category="culture">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🎨 Cultural Art & Yoga</span>
+              <span class="card-tag-right">Difficulty: Easy</span>
+              <img src="assets/images/almora.jpg" alt="Kasar Devi Yoga & Aipan Workshop Almora" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange); display: block; margin-bottom: 0.3rem;">📍 Almora, Crank's Ridge</span>
+              <h3 class="card-title">Kasar Devi Yoga & Aipan Workshop</h3>
+              <p class="card-description">
+                Experience sunrise meditation on the renowned geomagnetic ridge followed by a hands-on masterclass in traditional Kumaoni Aipan geometric ritual floor painting with rice paste.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 3 - 4 Hours</span>
+                <span class="card-meta-item">🎨 Aipan Art Kit</span>
+                <span class="card-meta-item">🧘 Meditation Session</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Aipan Workshop: Take home your hand-painted souvenir tile.', 'info')">Explore Details &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-summary">
+          <a href="index.html" class="navbar-brand">
+            <div class="brand-logo-icon">
+              <img src="assets/icons/logo.svg" alt="Tourism 360 Logo" width="46" height="46">
+            </div>
+            <div class="brand-text-group">
+              <span class="brand-name">Tourism <span>360</span></span>
+              <span class="brand-tagline">Explore More. Experience More.</span>
+            </div>
+          </a>
+          <p>An innovative digital tourism platform connecting travelers with authentic beauty, homestays, and hidden gems across Uttarakhand.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links-list">
+            <li><a href="destinations.html">All Destinations</a></li>
+            <li><a href="hotels.html">Hotels & Stays</a></li>
+            <li><a href="experiences.html">Experiences</a></li>
+            <li><a href="food.html">Local Food</a></li>
+            <li><a href="trip-planner.html">Smart Trip Planner</a></li>
+            <li><a href="vendor-login.html" style="color: var(--accent-orange); font-weight: 700;">Partner / Vendor Portal</a></li>
+            <li><a href="admin-login.html">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Explore Regions</h4>
+          <ul class="footer-links-list">
+            <li><a href="destination-nainital.html">Nainital</a></li>
+            <li><a href="destination-pithoragarh.html">Pithoragarh</a></li>
+            <li><a href="destination-bhimtal.html">Bhimtal</a></li>
+            <li><a href="destination-almora.html">Almora</a></li>
+            <li><a href="destination-mukteshwar.html">Mukteshwar</a></li>
+            <li><a href="destination-bageshwar.html">Bageshwar</a></li>
+            <li><a href="destination-dharchula.html">Dharchula</a></li>
+            <li><a href="destination-munsiyari.html">Munsiyari</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Support & Safety</h4>
+          <ul class="footer-links-list">
+            <li><a href="emergency.html" style="color: #fca5a5; font-weight: 700;">🚨 Emergency Help 360</a></li>
+            <li><a href="about.html">About Student Project</a></li>
+            <li><a href="contact.html">Contact Helpdesk</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year">2026</span> <strong>Tourism 360</strong>. All rights reserved.</p>
+        <div class="footer-social-links">
+          <a href="#" class="social-icon-btn">FB</a>
+          <a href="#" class="social-icon-btn">IG</a>
+          <a href="#" class="social-icon-btn">X</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to Top">↑</button>
+  <script src="js/main.js"></script>
+  <script src="js/database.js"></script>
+  <script src="js/vendor.js"></script>
+  <script src="js/filters.js"></script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinations in Uttarakhand | Tourism 360</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="navbar-brand" aria-label="Tourism 360° Home">
+        <div class="brand-logo-icon">
+          <img src="assets/icons/logo.svg" alt="Tourism 360° Logo" width="36" height="36">
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-name">TOURISM <span>360°</span></span>
+          <span class="brand-tagline">Explore More. Experience More.</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="hamburger-box">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <div class="nav-scroll-wrapper">
+          <button type="button" class="nav-scroll-btn nav-scroll-left" aria-label="Scroll navigation left">&#8249;</button>
+          <ul class="nav-links">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="destinations.html" class="active">Destinations</a></li>
+            <li class="nav-item"><a href="hotels.html">Hotels & Stays</a></li>
+            <li class="nav-item"><a href="experiences.html">Experiences</a></li>
+            <li class="nav-item"><a href="food.html">Local Food</a></li>
+            <li class="nav-item"><a href="trip-planner.html">Trip Planner</a></li>
+            <li class="nav-item"><a href="travel-guide.html">Travel Guide</a></li>
+            <li class="nav-item"><a href="about.html">About</a></li>
+          </ul>
+          <button type="button" class="nav-scroll-btn nav-scroll-right" aria-label="Scroll navigation right">&#8250;</button>
+        </div>
+        <div class="nav-actions">
+          <a href="login.html" class="nav-btn-auth" id="navAuthLink">🔑 Login / Sign In</a>
+          <a href="vendor-login.html" class="nav-btn-partner">Partner With Us</a>
+          <a href="contact.html" class="nav-btn-contact">Contact</a>
+          <a href="emergency.html" class="nav-btn-emergency">🚨 Emergency</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-wrapper hero-destinations" aria-labelledby="dest-hero-heading">
+      <div class="container hero-content">
+        <span class="hero-badge">Comprehensive Travel Directory</span>
+        <h1 id="dest-hero-heading" class="hero-title">Uttarakhand Destinations Directory</h1>
+        <p class="hero-subtitle">
+          Discover celebrated hill retreats, tranquil lakeside havens, sacred river valleys, and remote alpine frontiers across Kumaon.
+        </p>
+      </div>
+
+      <div class="mountain-layer"></div>
+      <div class="mountain-divider fill-light">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,90 350,-40 500,60 C650,140 900,10 1200,40 L1200,120 L0,120 Z"></path>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section-padding bg-light">
+      <div class="container">
+        
+        <div class="filter-bar">
+          <div class="filter-pills" role="tablist">
+            <button type="button" class="filter-btn dest-filter-btn active" data-filter="all">All Destinations (8)</button>
+            <button type="button" class="filter-btn dest-filter-btn" data-filter="lake">Lakes & Waterways</button>
+            <button type="button" class="filter-btn dest-filter-btn" data-filter="peaks">Snow Peaks & Treks</button>
+            <button type="button" class="filter-btn dest-filter-btn" data-filter="culture">Culture & Heritage</button>
+            <button type="button" class="filter-btn dest-filter-btn" data-filter="offbeat">Offbeat & Frontiers</button>
+          </div>
+
+          <div style="flex: 1; max-width: 320px; min-width: 220px;">
+            <input type="text" id="destPageSearch" class="form-control" placeholder="Search destination by name..." style="padding: 0.55rem 1rem; font-size: 0.9rem;">
+          </div>
+        </div>
+
+        <div id="destCountDisplay" style="margin-bottom: 1.5rem; font-weight: 600; color: var(--neutral-mid); font-size: 0.92rem;">
+          Showing 8 of 8 destinations
+        </div>
+
+        <div class="card-grid-3" id="destinationCardList">
+
+          <article class="tourism-card destination-item-card" data-category="lake culture" data-tags="nainital lake boating ropeway mall road kumaon">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Lake City</span>
+              <span class="card-tag-right">Altitude 2,084 m</span>
+              <img src="assets/images/nainital.jpg" alt="Nainital Lake surrounded by Himalayan hills" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Nainital</h3>
+              <p class="card-description">
+                The famous pear-shaped Naini Lake surrounded by seven emerald hills. Enjoy yachting, aerial ropeway rides to Snow View, and exploring vibrant Tibetan bazaars.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">📍 Kumaon Region</span>
+                <span class="card-meta-item">⏱️ Ideal 2-3 Days</span>
+                <span class="card-meta-item">🌤️ Mar-Jun, Oct-Dec</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-nainital.html" class="btn btn-secondary btn-sm">Explore Guide &rarr;</a>
+                <a href="trip-planner.html" class="btn btn-outline-primary btn-sm">Plan Visit</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card destination-item-card" data-category="peaks culture offbeat" data-tags="pithoragarh soar valley little kashmir fort mostamanu chandak">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Little Kashmir</span>
+              <span class="card-tag-right">Altitude 1,627 m</span>
+              <img src="assets/images/pithoragarh.jpg" alt="Pithoragarh valley and Himalayan mountains" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Pithoragarh</h3>
+              <p class="card-description">
+                Perched in the picturesque Soar Valley, Pithoragarh offers historic Gorkha forts, serene temples like Mostamanu, limestone caves, and uninterrupted Himalayan views.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">📍 Eastern Kumaon</span>
+                <span class="card-meta-item">⏱️ Ideal 3-4 Days</span>
+                <span class="card-meta-item">🌤️ Sep-Jun</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-pithoragarh.html" class="btn btn-secondary btn-sm">Explore Guide &rarr;</a>
+                <a href="trip-planner.html" class="btn btn-outline-primary btn-sm">Plan Visit</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card destination-item-card" data-category="lake offbeat" data-tags="bhimtal lake island aquarium victoria dam kayaking sattal butterfly">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Island Lake</span>
+              <span class="card-tag-right">Altitude 1,370 m</span>
+              <img src="assets/images/bhimtal.jpg" alt="Bhimtal Lake surrounded by green hills" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Bhimtal</h3>
+              <p class="card-description">
+                Larger than Nainital, Bhimtal is distinguished by a peaceful island in the center with an aquarium. Known for quiet kayaking, pine trails, and the historic Victoria Dam.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">📍 Nainital District</span>
+                <span class="card-meta-item">⏱️ Ideal 2 Days</span>
+                <span class="card-meta-item">🌤️ All Seasons</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-bhimtal.html" class="btn btn-secondary btn-sm">Explore Guide &rarr;</a>
+                <a href="trip-planner.html" class="btn btn-outline-primary btn-sm">Plan Visit</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card destination-item-card" data-category="culture offbeat" data-tags="almora kasar devi katarmal sun temple heritage bal mithai jageshwar">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Heritage & Light</span>
+              <span class="card-tag-right">Altitude 1,638 m</span>
+              <img src="assets/images/almora.jpg" alt="Almora mountain landscape and pine slopes" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Almora</h3>
+              <p class="card-description">
+                The cultural heart of Kumaon situated on a horse-saddle ridge. Famous for Kasar Devi's geomagnetic field, 9th-century Katarmal Sun Temple, and mouth-watering Bal Mithai.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">📍 Central Kumaon</span>
+                <span class="card-meta-item">⏱️ Ideal 2-3 Days</span>
+                <span class="card-meta-item">🌤️ Year-Round</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-almora.html" class="btn btn-secondary btn-sm">Explore Guide &rarr;</a>
+                <a href="trip-planner.html" class="btn btn-outline-primary btn-sm">Plan Visit</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card destination-item-card" data-category="peaks offbeat" data-tags="mukteshwar snow peaks chauli ki jali rappelling bhalu gaad waterfall orchards">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Snow Panorama</span>
+              <span class="card-tag-right">Altitude 2,171 m</span>
+              <img src="assets/images/mukteshwar.jpg" alt="Mukteshwar Himalayan scenery and mountain peaks" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Mukteshwar</h3>
+              <p class="card-description">
+                A serene hilltop haven offering a 180° uninterrupted vista of Himalayan snow ranges, dramatic cliff adventures at Chauli Ki Jali, and fragrant fruit orchards.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">📍 Nainital Hills</span>
+                <span class="card-meta-item">⏱️ Ideal 2-3 Days</span>
+                <span class="card-meta-item">🌤️ Oct-Jun</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-mukteshwar.html" class="btn btn-secondary btn-sm">Explore Guide &rarr;</a>
+                <a href="trip-planner.html" class="btn btn-outline-primary btn-sm">Plan Visit</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card destination-item-card" data-category="culture offbeat" data-tags="bageshwar bagnath saryu gomati sangam pindari glacier trek">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Sacred Confluence</span>
+              <span class="card-tag-right">Altitude 1,004 m</span>
+              <img src="assets/images/bageshwar.jpg" alt="Bageshwar river valley and Himalayan foothills" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Bageshwar</h3>
+              <p class="card-description">
+                A holy valley temple town at the confluence of Saryu and Gomati rivers. Serves as the spiritual gateway and basecamp for renowned Pindari and Kafni glacier treks.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">📍 Bageshwar District</span>
+                <span class="card-meta-item">⏱️ Ideal 2-4 Days</span>
+                <span class="card-meta-item">🌤️ Oct-May</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-bageshwar.html" class="btn btn-secondary btn-sm">Explore Guide &rarr;</a>
+                <a href="trip-planner.html" class="btn btn-outline-primary btn-sm">Plan Visit</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card destination-item-card" data-category="offbeat culture" data-tags="dharchula kali river rung tribe adi kailash om parvat border nepal">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Trans-Himalayan Border</span>
+              <span class="card-tag-right">Altitude 915 m</span>
+              <img src="assets/images/dharchula.jpg" alt="Dharchula Himalayan landscape along Kali River" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Dharchula</h3>
+              <p class="card-description">
+                A unique trans-Himalayan border town on the banks of Kali River facing Nepal. Rich in Rung indigenous tribal traditions and key gateway for Adi Kailash pilgrimages.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">📍 Pithoragarh Border</span>
+                <span class="card-meta-item">⏱️ Ideal 3-5 Days</span>
+                <span class="card-meta-item">🌤️ May-Jun, Sep-Nov</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-dharchula.html" class="btn btn-secondary btn-sm">Explore Guide &rarr;</a>
+                <a href="trip-planner.html" class="btn btn-outline-primary btn-sm">Plan Visit</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card destination-item-card" data-category="peaks offbeat" data-tags="munsiyari panchachuli khaliya top birthi falls darkot shawls shauka">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Panchachuli Base</span>
+              <span class="card-tag-right">Altitude 2,200 m</span>
+              <img src="assets/images/munsiyari.jpg" alt="Munsiyari with Panchachuli Himalayan snow peaks" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Munsiyari</h3>
+              <p class="card-description">
+                Known as the 'Place with Snow', Munsiyari stands face-to-face with the five majestic peaks of Panchachuli. Famed for Khaliya Top alpine bugyal treks and Birthi Falls.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">📍 Higher Kumaon</span>
+                <span class="card-meta-item">⏱️ Ideal 3-5 Days</span>
+                <span class="card-meta-item">🌤️ Mar-Jun, Sep-Nov</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-munsiyari.html" class="btn btn-secondary btn-sm">Explore Guide &rarr;</a>
+                <a href="trip-planner.html" class="btn btn-outline-primary btn-sm">Plan Visit</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-summary">
+          <a href="index.html" class="navbar-brand">
+            <div class="brand-logo-icon">
+              <img src="assets/icons/logo.svg" alt="Tourism 360 Logo" width="46" height="46">
+            </div>
+            <div class="brand-text-group">
+              <span class="brand-name">Tourism <span>360</span></span>
+              <span class="brand-tagline">Explore More. Experience More.</span>
+            </div>
+          </a>
+          <p>An innovative digital tourism platform connecting travelers with authentic beauty, homestays, and hidden gems across Uttarakhand.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links-list">
+            <li><a href="destinations.html">All Destinations</a></li>
+            <li><a href="hotels.html">Hotels & Stays</a></li>
+            <li><a href="experiences.html">Experiences & Treks</a></li>
+            <li><a href="food.html">Local Food & Cuisine</a></li>
+            <li><a href="trip-planner.html">Smart Trip Planner</a></li>
+            <li><a href="travel-guide.html">Traveler Guide</a></li>
+            <li><a href="vendor-login.html" style="color: var(--accent-orange); font-weight: 700;">Partner / Vendor Portal</a></li>
+            <li><a href="admin-login.html">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Explore Regions</h4>
+          <ul class="footer-links-list">
+            <li><a href="destination-nainital.html">Nainital</a></li>
+            <li><a href="destination-pithoragarh.html">Pithoragarh</a></li>
+            <li><a href="destination-bhimtal.html">Bhimtal</a></li>
+            <li><a href="destination-almora.html">Almora</a></li>
+            <li><a href="destination-mukteshwar.html">Mukteshwar</a></li>
+            <li><a href="destination-bageshwar.html">Bageshwar</a></li>
+            <li><a href="destination-dharchula.html">Dharchula</a></li>
+            <li><a href="destination-munsiyari.html">Munsiyari</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Support & Safety</h4>
+          <ul class="footer-links-list">
+            <li><a href="emergency.html" style="color: #fca5a5; font-weight: 700;">🚨 Emergency Help 360</a></li>
+            <li><a href="about.html">About Student Project</a></li>
+            <li><a href="contact.html">Contact Helpdesk</a></li>
+            <li><a href="travel-guide.html#etiquette">Responsible Tourism</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year">2026</span> <strong>Tourism 360</strong>. All rights reserved.</p>
+        <div class="footer-social-links">
+          <a href="#" class="social-icon-btn" aria-label="Facebook">FB</a>
+          <a href="#" class="social-icon-btn" aria-label="Instagram">IG</a>
+          <a href="#" class="social-icon-btn" aria-label="Twitter / X">X</a>
+          <a href="#" class="social-icon-btn" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to Top">↑</button>
+
+  <script src="js/main.js"></script>
+  <script src="js/database.js"></script>
+  <script src="js/vendor.js"></script>
+  <script src="js/destinations.js"></script>
+</body>
+</html>

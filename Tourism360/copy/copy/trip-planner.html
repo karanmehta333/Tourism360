@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner | Tourism 360°</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f7fb;
+            color: #14213d;
+        }
+
+        header {
+            background: #0b2342;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #ff8a00;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        nav a.active {
+            color: #ff8a00;
+        }
+
+        .planner-hero {
+            background: linear-gradient(135deg, #0b2342, #164d75);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .planner-hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .planner-hero p {
+            font-size: 18px;
+        }
+
+        .planner-container {
+            max-width: 1100px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+        }
+
+        .planner-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+        }
+
+        .planner-card h2 {
+            margin-bottom: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: 700;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ccd5df;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .style-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .style-choice {
+            cursor: pointer;
+        }
+
+        .style-choice input {
+            display: none;
+        }
+
+        .style-box {
+            display: block;
+            padding: 15px;
+            border: 2px solid #d9e1e8;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .style-choice input:checked + .style-box {
+            border-color: #ff7900;
+            background: #fff3e8;
+            color: #e56700;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 9px;
+            background: #0b2342;
+            color: white;
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #f36f00;
+        }
+
+        .btn-lg {
+            width: 100%;
+            margin-top: 28px;
+            padding: 16px;
+            font-size: 18px;
+        }
+
+        #itineraryOutput {
+            display: none;
+            margin-top: 35px;
+        }
+
+        .tourism-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #dfe6ed;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .tourism-card h2,
+        .tourism-card h3,
+        .tourism-card h4 {
+            margin-bottom: 12px;
+        }
+
+        .tourism-card p {
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .saved-section {
+            margin-top: 45px;
+        }
+
+        .saved-section > h2 {
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background: #0b2342;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 70px;
+        }
+
+        footer h2 {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                display: none;
+            }
+
+            .planner-hero h1 {
+                font-size: 32px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .style-selector-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        TOURISM <span>360°</span>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="hotels.html">Stays</a>
+        <a href="trip-planner.html" class="active">Trip Planner</a>
+        <a href="travel-guide.html">Travel Guide</a>
+    </nav>
+</header>
+
+<section class="planner-hero">
+    <h1>Plan Your Perfect Trip</h1>
+    <p>Create a personalized Uttarakhand itinerary with real hotels and estimated budget.</p>
+</section>
+
+<main class="planner-container">
+
+    <section class="planner-card">
+
+        <h2>Tell Us About Your Trip</h2>
+
+        <form id="tripPlannerForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="planDestination">Destination</label>
+
+                    <select id="planDestination" required>
+                        <option value="">Select destination</option>
+                        <option value="nainital">Nainital (Lake City)</option>
+                        <option value="pithoragarh">Pithoragarh (Soar Valley)</option>
+                        <option value="bhimtal">Bhimtal (Island Lake)</option>
+                        <option value="almora">Almora (Cultural Ridge)</option>
+                        <option value="mukteshwar">Mukteshwar (Snow Panorama)</option>
+                        <option value="bageshwar">Bageshwar (Glacier Gateway)</option>
+                        <option value="dharchula">Dharchula (Border Wonder)</option>
+                        <option value="munsiyari">Munsiyari (Panchachuli Base)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="planTravelers">Number of Travelers</label>
+
+                    <input
+                        type="number"
+                        id="planTravelers"
+                        min="1"
+                        max="20"
+                        value="2"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="planDays">Number of Days</label>
+
+                    <select id="planDays" required>
+                        <option value="2">2 Days</option>
+                        <option value="3" selected>3 Days</option>
+                        <option value="4">4 Days</option>
+                        <option value="5">5 Days</option>
+                        <option value="7">7 Days</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="planBudget">Budget Category</label>
+
+                    <select id="planBudget" required>
+                        <option value="budget">Budget</option>
+                        <option value="moderate" selected>Moderate</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+
+                    <label>Travel Style & Preference</label>
+
+                    <div class="style-selector-grid">
+
+                        <label class="style-choice">
+                            <input
+                                type="radio"
+                                name="travelStyle"
+                                value="Nature & Scenery"
+                                checked
+                            >
+                            <span class="style-box">🌲 Nature</span>
+                        </label>
+
+                        <label class="style-choice">
+                            <input
+                                type="radio"
+                                name="travelStyle"
+                                value="Adventure & Sports"
+                            >
+                            <span class="style-box">🧗 Adventure</span>
+                        </label>
+
+                        <label class="style-choice">
+                            <input
+                                type="radio"
+                                name="travelStyle"
+                                value="Culture & Heritage"
+                            >
+                            <span class="style-box">🛕 Culture</span>
+                        </label>
+
+                        <label class="style-choice">
+                            <input
+                                type="radio"
+                                name="travelStyle"
+                                value="Relaxation & Wellness"
+                            >
+                            <span class="style-box">🧘 Relaxation</span>
+                        </label>
+
+                        <label class="style-choice">
+                            <input
+                                type="radio"
+                                name="travelStyle"
+                                value="Family & Leisure"
+                            >
+                            <span class="style-box">👨‍👩‍👧 Family</span>
+                        </label>
+
+                        <label class="style-choice">
+                            <input
+                                type="radio"
+                                name="travelStyle"
+                                value="Landscape Photography"
+                            >
+                            <span class="style-box">📷 Photography</span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary btn-lg"
+                id="createTripBtn"
+            >
+                Create My Trip →
+            </button>
+
+        </form>
+
+        <div id="loading">
+            Creating your personalized trip...
+        </div>
+
+        <div id="itineraryOutput"></div>
+
+    </section>
+
+    <section class="saved-section">
+
+        <h2>Saved Trips</h2>
+
+        <div id="savedTripsContainer"></div>
+
+    </section>
+
+</main>
+
+<footer>
+    <h2>TOURISM 360°</h2>
+    <p>Explore More. Experience More.</p>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/database.js"></script>
+<script src="js/vendor.js"></script>
+<script src="js/trip-planner.js"></script>
+
+</body>
+</html>

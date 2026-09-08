@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Tourism Listing | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="portal-body">
+
+  <div class="portal-layout">
+    <aside class="portal-sidebar" id="vendorSidebar"></aside>
+
+    <div class="portal-main">
+      <header class="portal-topbar">
+        <div class="portal-topbar-left">
+          <button class="sidebar-toggle-mobile" aria-label="Toggle Navigation">☰</button>
+          <div class="topbar-heading">
+            <h1>Create New Tourism Listing</h1>
+            <p>Publish a hotel stay, trek itinerary, pahadi meal, or guided mountain tour</p>
+          </div>
+        </div>
+      </header>
+
+      <main class="portal-content">
+
+        <div class="panel-card" style="max-width: 900px; margin: 0 auto 2rem auto;">
+          <div class="panel-header">
+            <h2 class="panel-title"><span>➕</span> Listing Details</h2>
+            <span class="badge-status pending">Initial Status: Pending Approval</span>
+          </div>
+
+          <form id="addListingForm">
+            <div class="portal-form-grid">
+              
+              <div class="portal-form-group form-group-full">
+                <label class="portal-label" for="listTitle">Listing Name / Title <span class="required">*</span></label>
+                <input type="text" id="listTitle" class="portal-input" placeholder="e.g. Heritage Cedar Wood Suite / Khaliya Top Guided Trek" required>
+              </div>
+
+              <div class="portal-form-group">
+                <label class="portal-label" for="listCategory">Category <span class="required">*</span></label>
+                <select id="listCategory" class="portal-select" required>
+                  <option value="">Select Category</option>
+                  <option value="Hotel">Hotel / Lodge</option>
+                  <option value="Homestay">Village Homestay</option>
+                  <option value="Restaurant">Restaurant / Local Food</option>
+                  <option value="Local Experience">Local Experience / Craft</option>
+                  <option value="Tour Guide">Tour Guide</option>
+                  <option value="Trekking Guide">Trekking Guide / Summit</option>
+                  <option value="Transport Service">Transport / Taxi Service</option>
+                  <option value="Local Product">Local Pahadi Product</option>
+                </select>
+              </div>
+
+              <div class="portal-form-group">
+                <label class="portal-label" for="listDistrict">Location / District <span class="required">*</span></label>
+                <select id="listDistrict" class="portal-select" required>
+                  <option value="Nainital">Nainital</option>
+                  <option value="Pithoragarh">Pithoragarh</option>
+                  <option value="Bhimtal">Bhimtal</option>
+                  <option value="Almora">Almora</option>
+                  <option value="Mukteshwar">Mukteshwar</option>
+                  <option value="Bageshwar">Bageshwar</option>
+                  <option value="Dharchula">Dharchula</option>
+                  <option value="Munsiyari">Munsiyari</option>
+                </select>
+              </div>
+
+              <div class="portal-form-group">
+                <label class="portal-label" for="listPrice">Price (₹ INR) <span class="required">*</span></label>
+                <input type="number" id="listPrice" class="portal-input" placeholder="e.g. 2400" required min="100">
+                <span class="portal-help-text">Enter base amount (e.g. per night, per person, or per service)</span>
+              </div>
+
+              <div class="portal-form-group">
+                <label class="portal-label" for="listPriceTier">Price Tier</label>
+                <select id="listPriceTier" class="portal-select">
+                  <option value="budget">Budget (Under ₹1,800)</option>
+                  <option value="moderate" selected>Moderate (₹1,800 - ₹3,500)</option>
+                  <option value="premium">Premium (Above ₹3,500)</option>
+                </select>
+              </div>
+
+              <div class="portal-form-group form-group-full">
+                <label class="portal-label" for="listShortDesc">Short Summary <span class="required">*</span></label>
+                <input type="text" id="listShortDesc" class="portal-input" placeholder="1-2 sentences highlighting the key highlight or panoramic view..." required maxlength="160">
+              </div>
+
+              <div class="portal-form-group form-group-full">
+                <label class="portal-label" for="listFullDesc">Detailed Description</label>
+                <textarea id="listFullDesc" class="portal-textarea" rows="4" placeholder="Describe the complete experience, room amenities, itinerary steps, food inclusions, guides, and mountain views..."></textarea>
+              </div>
+
+              <div class="portal-form-group">
+                <label class="portal-label" for="listServices">Included Services (Comma Separated)</label>
+                <input type="text" id="listServices" class="portal-input" placeholder="e.g. Breakfast, Forest Hike, Wi-Fi, Bonfire">
+              </div>
+
+              <div class="portal-form-group">
+                <label class="portal-label" for="listFacilities">Key Facilities / Amenities</label>
+                <input type="text" id="listFacilities" class="portal-input" placeholder="e.g. Hot Water, Parking, Valley Balcony, Tents">
+              </div>
+
+              <div class="portal-form-group">
+                <label class="portal-label" for="listContact">Contact Phone Number <span class="required">*</span></label>
+                <input type="tel" id="listContact" class="portal-input" placeholder="e.g. +91 98765 43210" required>
+              </div>
+
+              <div class="portal-form-group">
+                <label class="portal-label" for="listBestTime">Best Season / Timing</label>
+                <input type="text" id="listBestTime" class="portal-input" placeholder="e.g. September to June / All Year">
+              </div>
+
+              <div class="portal-form-group form-group-full">
+                <label class="portal-label" for="listImageSelect">Listing Image</label>
+                <select id="listImageSelect" class="portal-select" style="margin-bottom: 0.4rem;">
+                  <option value="assets/images/nainital.jpg">Nainital Emerald Lake & Pine Hills</option>
+                  <option value="assets/images/munsiyari.jpg">Munsiyari Panchachuli Alpine Peaks</option>
+                  <option value="assets/images/munsiyari-village.jpg">Sarmoli Community Village Homestay</option>
+                  <option value="assets/images/bhimtal.jpg">Bhimtal & Naukuchiatal Valley Lakes</option>
+                  <option value="assets/images/almora.jpg">Almora Heritage Street & Pines</option>
+                  <option value="assets/images/pithoragarh.jpg">Pithoragarh Soar Valley Panorama</option>
+                  <option value="assets/images/mukteshwar.jpg">Mukteshwar Orchards & Snow Ridges</option>
+                  <option value="assets/images/bageshwar.jpg">Bageshwar Sacred River Confluence</option>
+                  <option value="assets/images/dharchula.jpg">Dharchula Border Valleys</option>
+                </select>
+                <input type="text" id="listImageCustom" class="portal-input" placeholder="Or enter custom image URL (optional)">
+              </div>
+
+            </div>
+
+            <div class="disclaimer-banner" style="margin-top: 1.5rem;">
+              Listing Workflow: Once submitted, listings are marked as <strong>Pending</strong>. The platform Administrator will review and approve it before it becomes publicly visible on Tourism 360°.
+            </div>
+
+            <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+              <a href="vendor-my-listings.html" class="btn btn-outline-primary" style="padding: 0.75rem 1.5rem;">Cancel</a>
+              <button type="submit" class="btn btn-primary" style="padding: 0.75rem 2rem; font-size: 1rem;">Publish Listing</button>
+            </div>
+          </form>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/vendor.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const vendor = requireVendorAuth();
+      if (!vendor) return;
+
+      renderVendorSidebar("add-listing");
+
+      if (vendor.phone) document.getElementById("listContact").value = vendor.phone;
+      if (vendor.district) document.getElementById("listDistrict").value = vendor.district;
+
+      document.getElementById("addListingForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const title = document.getElementById("listTitle").value.trim();
+        const category = document.getElementById("listCategory").value;
+        const district = document.getElementById("listDistrict").value;
+        const priceNum = document.getElementById("listPrice").value.trim();
+        const priceTier = document.getElementById("listPriceTier").value;
+        const shortDesc = document.getElementById("listShortDesc").value.trim();
+        const fullDesc = document.getElementById("listFullDesc").value.trim() || shortDesc;
+        const services = document.getElementById("listServices").value.trim();
+        const facilities = document.getElementById("listFacilities").value.trim();
+        const contact = document.getElementById("listContact").value.trim();
+        const bestTime = document.getElementById("listBestTime").value.trim() || "All Season";
+        const customImg = document.getElementById("listImageCustom").value.trim();
+        const selectImg = document.getElementById("listImageSelect").value;
+        const image = customImg || selectImg;
+
+        let unit = "night";
+        if (category.includes("Guide") || category.includes("Trek") || category.includes("Experience")) unit = "person";
+        if (category === "Restaurant") unit = "thali";
+        if (category.includes("Transport")) unit = "trip";
+
+        const newListing = {
+          id: "list_" + Date.now(),
+          vendorId: vendor.id,
+          vendorName: vendor.name,
+          businessName: vendor.businessName,
+          title: title,
+          category: category,
+          district: district.toLowerCase(),
+          districtDisplay: district,
+          shortDesc: shortDesc,
+          description: fullDesc,
+          price: priceNum,
+          priceDisplay: "₹" + parseInt(priceNum).toLocaleString("en-IN") + " / " + unit,
+          priceTier: priceTier,
+          services: services,
+          facilities: facilities,
+          contact: contact,
+          bestTime: bestTime,
+          rating: 5.0,
+          image: image,
+          status: "Pending",
+          createdAt: new Date().toISOString().split("T")[0]
+        };
+
+        const listings = getStoredListings();
+        listings.unshift(newListing);
+        saveStoredListings(listings);
+
+        showPortalToast("Listing created! Status: Pending Admin Approval.", "success");
+        setTimeout(() => {
+          window.location.href = "vendor-my-listings.html";
+        }, 1000);
+      });
+    });
+  </script>
+</body>
+</html>

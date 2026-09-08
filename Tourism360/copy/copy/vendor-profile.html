@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Profile | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="portal-body">
+
+  <div class="portal-layout">
+    <aside class="portal-sidebar" id="vendorSidebar"></aside>
+
+    <div class="portal-main">
+      <header class="portal-topbar">
+        <div class="portal-topbar-left">
+          <button class="sidebar-toggle-mobile" aria-label="Toggle Navigation">☰</button>
+          <div class="topbar-heading">
+            <h1>Business Profile Management</h1>
+            <p>Edit public details, contact numbers, amenities, and photos</p>
+          </div>
+        </div>
+
+        <div class="portal-topbar-right">
+          <button type="button" class="btn btn-primary btn-sm" id="btnSaveProfileTop">Save Changes</button>
+        </div>
+      </header>
+
+      <main class="portal-content">
+
+        <div class="completion-banner" style="margin-bottom: 1.5rem;">
+          <div class="completion-info" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <h3 style="margin: 0;">Profile Completion Status</h3>
+              <span class="progress-text" id="profCompletionText">75% Complete</span>
+            </div>
+            <div class="progress-track" style="max-width: 100%;">
+              <div class="progress-bar" id="profCompletionBar" style="width: 75%;"></div>
+            </div>
+            <small style="color: #cbd5e1; display: block; margin-top: 0.4rem;">Complete all fields including photos, amenities, and pricing to boost tourist trust and discoverability.</small>
+          </div>
+        </div>
+
+        <div class="preview-container">
+          
+          <div class="panel-card" style="margin-bottom: 0;">
+            <div class="panel-header">
+              <h2 class="panel-title"><span>📝</span> Edit Business Information</h2>
+            </div>
+
+            <form id="vendorProfileForm">
+              <div class="portal-form-grid">
+                <div class="portal-form-group">
+                  <label class="portal-label" for="profBusinessName">Business Name <span class="required">*</span></label>
+                  <input type="text" id="profBusinessName" class="portal-input" required>
+                </div>
+
+                <div class="portal-form-group">
+                  <label class="portal-label" for="profBusinessType">Business Type <span class="required">*</span></label>
+                  <select id="profBusinessType" class="portal-select" required>
+                    <option value="Hotel / Homestay">Hotel / Homestay</option>
+                    <option value="Local Vendor">Local Vendor / Handicraft</option>
+                    <option value="Tour Guide">Tour Guide</option>
+                    <option value="Trekking Guide">Trekking Guide</option>
+                    <option value="Experience Provider">Experience Provider</option>
+                    <option value="Restaurant">Restaurant / Local Food</option>
+                    <option value="Transport Provider">Travel / Transport Provider</option>
+                  </select>
+                </div>
+
+                <div class="portal-form-group">
+                  <label class="portal-label" for="profOwnerName">Owner / Manager Name <span class="required">*</span></label>
+                  <input type="text" id="profOwnerName" class="portal-input" required>
+                </div>
+
+                <div class="portal-form-group">
+                  <label class="portal-label" for="profPhone">Primary Phone <span class="required">*</span></label>
+                  <input type="tel" id="profPhone" class="portal-input" required>
+                </div>
+
+                <div class="portal-form-group">
+                  <label class="portal-label" for="profEmail">Contact Email</label>
+                  <input type="email" id="profEmail" class="portal-input" readonly style="background: #f1f5f9;">
+                </div>
+
+                <div class="portal-form-group">
+                  <label class="portal-label" for="profDistrict">District / Region <span class="required">*</span></label>
+                  <select id="profDistrict" class="portal-select" required>
+                    <option value="Nainital">Nainital</option>
+                    <option value="Pithoragarh">Pithoragarh</option>
+                    <option value="Bhimtal">Bhimtal</option>
+                    <option value="Almora">Almora</option>
+                    <option value="Mukteshwar">Mukteshwar</option>
+                    <option value="Bageshwar">Bageshwar</option>
+                    <option value="Dharchula">Dharchula</option>
+                    <option value="Munsiyari">Munsiyari</option>
+                  </select>
+                </div>
+
+                <div class="portal-form-group form-group-full">
+                  <label class="portal-label" for="profAddress">Full Address</label>
+                  <input type="text" id="profAddress" class="portal-input">
+                </div>
+
+                <div class="portal-form-group form-group-full">
+                  <label class="portal-label" for="profAbout">About Business / Description</label>
+                  <textarea id="profAbout" class="portal-textarea" rows="3" placeholder="Tell tourists about your stay, food quality, heritage, and local experiences..."></textarea>
+                </div>
+
+                <div class="portal-form-group">
+                  <label class="portal-label" for="profHours">Operating Hours</label>
+                  <input type="text" id="profHours" class="portal-input" placeholder="e.g. Open 24 Hours / 07:00 AM - 10:00 PM">
+                </div>
+
+                <div class="portal-form-group">
+                  <label class="portal-label" for="profPriceRange">Typical Price Range</label>
+                  <input type="text" id="profPriceRange" class="portal-input" placeholder="e.g. ₹1,800 - ₹3,500 / night">
+                </div>
+
+                <div class="portal-form-group form-group-full">
+                  <label class="portal-label" for="profServices">Services Offered (Comma Separated)</label>
+                  <input type="text" id="profServices" class="portal-input" placeholder="e.g. Homestay Dining, High-Altitude Trekking, Guided Walks, Bonfires">
+                </div>
+
+                <div class="portal-form-group form-group-full">
+                  <label class="portal-label" for="profFacilities">Facilities & Amenities (Comma Separated)</label>
+                  <input type="text" id="profFacilities" class="portal-input" placeholder="e.g. Free Wi-Fi, Hot Water Geyser, Parking, Mountain View Balcony">
+                </div>
+
+                <div class="portal-form-group">
+                  <label class="portal-label" for="profSocial">Website / Social Profile URL</label>
+                  <input type="url" id="profSocial" class="portal-input" placeholder="https://instagram.com/yourbusiness">
+                </div>
+
+                <div class="portal-form-group">
+                  <label class="portal-label" for="profImage">Profile Image URL or Path</label>
+                  <select id="profImageSelect" class="portal-select" style="margin-bottom: 0.35rem;">
+                    <option value="assets/images/nainital.jpg">Nainital Lake & Pine Views</option>
+                    <option value="assets/images/munsiyari.jpg">Munsiyari Panchachuli Peaks</option>
+                    <option value="assets/images/munsiyari-village.jpg">Traditional Village Homestay</option>
+                    <option value="assets/images/almora.jpg">Almora Heritage Ridge</option>
+                    <option value="assets/images/bhimtal.jpg">Bhimtal Island Lake</option>
+                    <option value="assets/images/pithoragarh.jpg">Pithoragarh Soar Valley</option>
+                    <option value="assets/images/mukteshwar.jpg">Mukteshwar Orchards & Snow</option>
+                  </select>
+                  <input type="text" id="profImage" class="portal-input" placeholder="Custom image URL (optional)">
+                </div>
+              </div>
+
+              <div style="margin-top: 1.75rem;">
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem; border-radius: 8px;">Save Profile Changes</button>
+              </div>
+            </form>
+          </div>
+
+          <div>
+            <div class="preview-pane">
+              <div class="preview-pane-header">
+                <span>👁️</span> Public Tourist Preview Card
+              </div>
+              
+              <article class="tourism-card" id="cardPreviewContainer" style="margin-bottom: 1.5rem; background: #ffffff;">
+                <div class="card-image-wrap">
+                  <span class="card-badge-top" id="prevBadgeType">🏡 Homestay</span>
+                  <span class="card-tag-right" id="prevTagPrice">₹2,400 / night</span>
+                  <img src="assets/images/nainital.jpg" id="prevImg" alt="Business Preview Image" class="card-image-img">
+                </div>
+                <div class="card-body">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange);" id="prevLocation">📍 Nainital, Uttarakhand</span>
+                    <span style="font-size: 0.85rem; font-weight: 700; color: var(--primary-dark);">★ 4.9 Verified</span>
+                  </div>
+                  <h3 class="card-title" id="prevTitle" style="font-size: 1.25rem;">Himalayan Pine Retreat</h3>
+                  <p class="card-description" id="prevAbout">
+                    Tranquil family-run wooden cottage overlooking the emerald valley with organic dining and bonfire evenings.
+                  </p>
+                  <div class="card-meta-list" id="prevServicesList">
+                    <span class="card-meta-item">🌲 Mountain Views</span>
+                    <span class="card-meta-item">☕ Pahadi Meals</span>
+                    <span class="card-meta-item">📶 Wi-Fi</span>
+                  </div>
+                  <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="verified-partner-badge">✓ Verified Local Partner</span>
+                    <button type="button" class="btn btn-primary btn-sm">Contact / Book &rarr;</button>
+                  </div>
+                </div>
+              </article>
+
+              <div style="background: #ffffff; padding: 1.25rem; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 0.88rem;">
+                <strong style="color: #0b1f3a; display: block; margin-bottom: 0.35rem;">Owner Contact:</strong>
+                <div id="prevContactText" style="color: #475569;">Sunil Rawat • +91 98765 43210</div>
+                <div id="prevHoursText" style="color: #64748b; font-size: 0.8rem; margin-top: 0.25rem;">Timing: Open 24 Hours</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/vendor.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const vendor = requireVendorAuth();
+      if (!vendor) return;
+
+      renderVendorSidebar("profile");
+
+      document.getElementById("profBusinessName").value = vendor.businessName || "";
+      document.getElementById("profBusinessType").value = vendor.businessType || "Hotel / Homestay";
+      document.getElementById("profOwnerName").value = vendor.name || "";
+      document.getElementById("profPhone").value = vendor.phone || "";
+      document.getElementById("profEmail").value = vendor.email || "";
+      document.getElementById("profDistrict").value = vendor.district || "Nainital";
+      document.getElementById("profAddress").value = vendor.address || "";
+      document.getElementById("profAbout").value = vendor.about || "";
+      document.getElementById("profHours").value = vendor.openingHours || "";
+      document.getElementById("profPriceRange").value = vendor.priceRange || "";
+      document.getElementById("profServices").value = vendor.services || "";
+      document.getElementById("profFacilities").value = vendor.facilities || "";
+      document.getElementById("profSocial").value = vendor.socialLink || "";
+      document.getElementById("profImage").value = vendor.image || "";
+
+      function updateLivePreview() {
+        const bName = document.getElementById("profBusinessName").value || "Your Business Name";
+        const bType = document.getElementById("profBusinessType").value || "Local Business";
+        const oName = document.getElementById("profOwnerName").value || "Owner Name";
+        const phone = document.getElementById("profPhone").value || "+91 XXXXX XXXXX";
+        const dist = document.getElementById("profDistrict").value || "Uttarakhand";
+        const about = document.getElementById("profAbout").value || "Describe your hospitality and mountain services for incoming tourists.";
+        const price = document.getElementById("profPriceRange").value || "₹2,000 / day";
+        const hours = document.getElementById("profHours").value || "Open 24 Hours";
+        const services = document.getElementById("profServices").value;
+        const customImg = document.getElementById("profImage").value.trim();
+        const selectImg = document.getElementById("profImageSelect").value;
+        const finalImg = customImg || selectImg;
+
+        document.getElementById("prevTitle").textContent = bName;
+        document.getElementById("prevBadgeType").textContent = "🏡 " + bType;
+        document.getElementById("prevTagPrice").textContent = price;
+        document.getElementById("prevLocation").textContent = "📍 " + dist + ", Uttarakhand";
+        document.getElementById("prevAbout").textContent = about;
+        document.getElementById("prevImg").src = finalImg;
+        document.getElementById("prevContactText").textContent = oName + " • " + phone;
+        document.getElementById("prevHoursText").textContent = "Timing: " + hours;
+
+        const servicesList = document.getElementById("prevServicesList");
+        if (services.trim()) {
+          servicesList.innerHTML = services.split(",").slice(0, 3).map(s => `<span class="card-meta-item">✨ ${s.trim()}</span>`).join("");
+        } else {
+          servicesList.innerHTML = `<span class="card-meta-item">✨ Authentic Stay</span><span class="card-meta-item">✨ Verified Local</span>`;
+        }
+
+        const tempVendor = {
+          name: oName,
+          businessName: bName,
+          email: vendor.email,
+          phone: phone,
+          businessType: bType,
+          district: dist,
+          address: document.getElementById("profAddress").value,
+          about: about,
+          openingHours: hours,
+          priceRange: price,
+          services: services,
+          facilities: document.getElementById("profFacilities").value,
+          image: finalImg
+        };
+
+        const score = calculateProfileCompletion(tempVendor);
+        document.getElementById("profCompletionBar").style.width = score + "%";
+        document.getElementById("profCompletionText").textContent = score + "% Complete";
+      }
+
+      const inputs = document.querySelectorAll("#vendorProfileForm input, #vendorProfileForm select, #vendorProfileForm textarea");
+      inputs.forEach(input => input.addEventListener("input", updateLivePreview));
+      document.getElementById("profImageSelect").addEventListener("change", updateLivePreview);
+
+      updateLivePreview();
+
+      function saveProfileData() {
+        const customImg = document.getElementById("profImage").value.trim();
+        const selectImg = document.getElementById("profImageSelect").value;
+
+        vendor.businessName = document.getElementById("profBusinessName").value.trim();
+        vendor.businessType = document.getElementById("profBusinessType").value;
+        vendor.name = document.getElementById("profOwnerName").value.trim();
+        vendor.phone = document.getElementById("profPhone").value.trim();
+        vendor.district = document.getElementById("profDistrict").value;
+        vendor.address = document.getElementById("profAddress").value.trim();
+        vendor.about = document.getElementById("profAbout").value.trim();
+        vendor.openingHours = document.getElementById("profHours").value.trim();
+        vendor.priceRange = document.getElementById("profPriceRange").value.trim();
+        vendor.services = document.getElementById("profServices").value.trim();
+        vendor.facilities = document.getElementById("profFacilities").value.trim();
+        vendor.socialLink = document.getElementById("profSocial").value.trim();
+        vendor.image = customImg || selectImg;
+
+        setCurrentVendor(vendor);
+
+        const allVendors = getStoredVendors();
+        const idx = allVendors.findIndex(v => v.id === vendor.id);
+        if (idx !== -1) {
+          allVendors[idx] = vendor;
+          saveStoredVendors(allVendors);
+        }
+
+        showPortalToast("Business profile updated successfully!", "success");
+      }
+
+      document.getElementById("vendorProfileForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        saveProfileData();
+      });
+
+      document.getElementById("btnSaveProfileTop").addEventListener("click", function() {
+        saveProfileData();
+      });
+    });
+  </script>
+</body>
+</html>

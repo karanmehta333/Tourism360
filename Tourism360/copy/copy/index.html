@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tourism 360 | Explore More. Experience More.</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+  <script>
+    (function() {
+      const isUser = localStorage.getItem("t360_current_user");
+      const isVendor = localStorage.getItem("t360_current_vendor");
+      const isAdmin = localStorage.getItem("t360_admin_session");
+      const isGuest = new URLSearchParams(window.location.search).get("guest") === "true";
+      if (!isUser && !isVendor && !isAdmin && !isGuest) {
+        window.location.replace("login.html");
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="navbar-brand" aria-label="Tourism 360 Home">
+        <div class="brand-logo-icon">
+          <img src="assets/icons/logo.svg" alt="Tourism 360 Mountain Logo" width="46" height="46">
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-name">Tourism <span>360</span></span>
+          <span class="brand-tagline">Explore More. Experience More.</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="hamburger-box">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <div class="nav-scroll-wrapper">
+          <button type="button" class="nav-scroll-btn nav-scroll-left" aria-label="Scroll navigation left">&#8249;</button>
+          <ul class="nav-links">
+            <li class="nav-item"><a href="index.html" class="active">Home</a></li>
+            <li class="nav-item"><a href="destinations.html">Destinations</a></li>
+            <li class="nav-item"><a href="hotels.html">Hotels & Stays</a></li>
+            <li class="nav-item"><a href="experiences.html">Experiences</a></li>
+            <li class="nav-item"><a href="food.html">Local Food</a></li>
+            <li class="nav-item"><a href="trip-planner.html">Trip Planner</a></li>
+            <li class="nav-item"><a href="travel-guide.html">Travel Guide</a></li>
+            <li class="nav-item"><a href="about.html">About</a></li>
+          </ul>
+          <button type="button" class="nav-scroll-btn nav-scroll-right" aria-label="Scroll navigation right">&#8250;</button>
+        </div>
+        <div class="nav-actions">
+          <a href="login.html" class="nav-btn-auth" id="navAuthLink">🔑 Login / Sign In</a>
+          <a href="vendor-login.html" class="nav-btn-partner">Partner With Us</a>
+          <a href="contact.html" class="nav-btn-contact">Contact</a>
+          <a href="emergency.html" class="nav-btn-emergency">🚨 Emergency</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-wrapper hero-home" aria-labelledby="hero-heading">
+      <div class="container hero-content">
+        <span class="hero-badge">Discover Uttarakhand Beyond the Ordinary</span>
+        <h1 id="hero-heading" class="hero-title">Explore Hidden Himalayan Wonders & Local Mountain Life</h1>
+        <p class="hero-subtitle">
+          Connect directly with authentic mountain destinations, serene homestays, local Kumaoni cuisine, alpine trails, and student-powered smart trip planning.
+        </p>
+        
+        <div class="hero-buttons">
+          <a href="destinations.html" class="btn btn-primary btn-lg">Explore Destinations</a>
+          <a href="trip-planner.html" class="btn btn-outline-white btn-lg">Plan Your Trip</a>
+        </div>
+
+        <div class="hero-search-box">
+          <label for="globalDestSearch" style="display: block; font-size: 0.88rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 0.5rem;">
+            Where do you want to go in Uttarakhand?
+          </label>
+          <div class="search-form-flex" style="position: relative;">
+            <div class="search-input-wrapper">
+              <span class="search-icon">📍</span>
+              <input type="text" id="globalDestSearch" class="search-input-field" placeholder="Search Nainital, Munsiyari, Almora, Mukteshwar..." autocomplete="off">
+            </div>
+            <a href="destinations.html" class="btn btn-secondary">Browse All</a>
+            
+            <div id="searchDropdown" class="search-results-dropdown" role="listbox"></div>
+          </div>
+        </div>
+
+        <div class="hero-quick-auth-bar">
+          <span style="font-size: 0.85rem; color: #e2e8f0; font-weight: 700;">Quick Access:</span>
+          <a href="login.html" class="hero-quick-auth-link">🔑 Sign In / Log In</a>
+          <a href="register.html" class="hero-quick-auth-link">✨ Create Free Account</a>
+          <a href="vendor-login.html" class="hero-quick-auth-link" style="border-color: rgba(249, 160, 63, 0.4); color: #f9a03f;">🏢 Business / Vendor Portal</a>
+          <a href="admin-login.html" class="hero-quick-auth-link" style="border-color: rgba(56, 189, 248, 0.4); color: #7dd3fc;">🛡️ Admin Portal</a>
+        </div>
+      </div>
+
+      <div class="mountain-layer"></div>
+      <div class="mountain-divider fill-light">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,90 350,-40 500,60 C650,140 900,10 1200,40 L1200,120 L0,120 Z"></path>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section-padding bg-light" id="destinations-overview">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Curated Regions</span>
+          <h2 class="section-title">Explore Uttarakhand’s Diverse Landscapes</h2>
+          <p class="section-subtitle">
+            From tranquil high-altitude lakes and ancient temple ridges to dramatic snow-covered trans-Himalayan peaks, discover both celebrated and offbeat destinations.
+          </p>
+        </div>
+
+        <div class="card-grid-4">
+          <article class="tourism-card">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Lakes & Views</span>
+              <img src="assets/images/nainital.jpg" alt="Nainital Lake surrounded by Himalayan hills" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Nainital</h3>
+              <p class="card-description">
+                The jewel of Kumaon framed by eye-shaped Naini Lake, lush oak hills, and panoramic snow viewpoints.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 2-3 Days</span>
+                <span class="card-meta-item">🌤️ Mar - Jun, Oct - Jan</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-nainital.html" class="btn btn-secondary btn-sm">Explore Details &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Little Kashmir</span>
+              <img src="assets/images/pithoragarh.jpg" alt="Pithoragarh valley and Himalayan mountains" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Pithoragarh</h3>
+              <p class="card-description">
+                A breathtaking Himalayan valley known for ancient fortresses, pine ridges, and serene hilltop shrines.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 3-4 Days</span>
+                <span class="card-meta-item">🌤️ Sep - Jun</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-pithoragarh.html" class="btn btn-secondary btn-sm">Explore Details &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Island Lake</span>
+              <img src="assets/images/bhimtal.jpg" alt="Bhimtal Lake surrounded by green hills" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Bhimtal</h3>
+              <p class="card-description">
+                A peaceful lakeside town famous for its central island aquarium, butterfly reserves, and forested trails.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 2 Days</span>
+                <span class="card-meta-item">🌤️ Year-Round</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-bhimtal.html" class="btn btn-secondary btn-sm">Explore Details &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Cultural Capital</span>
+              <img src="assets/images/almora.jpg" alt="Almora mountain landscape and pine slopes" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Almora</h3>
+              <p class="card-description">
+                Rich in Kumaoni heritage, ancient Katarmal sun temples, Kasar Devi geomagnetic ridge, and authentic sweets.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 2-3 Days</span>
+                <span class="card-meta-item">🌤️ Sep - Nov, Mar - Jun</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-almora.html" class="btn btn-secondary btn-sm">Explore Details &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Snow Panorama</span>
+              <img src="assets/images/mukteshwar.jpg" alt="Mukteshwar Himalayan scenery and mountain peaks" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Mukteshwar</h3>
+              <p class="card-description">
+                Spectacular 180° snow peaks, fruit orchards, rock climbing at Chauli Ki Jali, and tranquil pine forest walks.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 2-3 Days</span>
+                <span class="card-meta-item">🌤️ Oct - Jun</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-mukteshwar.html" class="btn btn-secondary btn-sm">Explore Details &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Sacred Confluence</span>
+              <img src="assets/images/bageshwar.jpg" alt="Bageshwar river valley and Himalayan foothills" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Bageshwar</h3>
+              <p class="card-description">
+                Spiritual Sangam of Saryu and Gomati rivers, historic Bagnath shrine, and gateway to Pindari Glacier treks.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 2-4 Days</span>
+                <span class="card-meta-item">🌤️ Oct - May</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-bageshwar.html" class="btn btn-secondary btn-sm">Explore Details &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Border Wonder</span>
+              <img src="assets/images/dharchula.jpg" alt="Dharchula Himalayan landscape along Kali River" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Dharchula</h3>
+              <p class="card-description">
+                A captivating Himalayan border town along the Kali River, rich in Rung tribal culture and Kailash routes.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 3-5 Days</span>
+                <span class="card-meta-item">🌤️ May - Jun, Sep - Nov</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-dharchula.html" class="btn btn-secondary btn-sm">Explore Details &rarr;</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">Alpine Glory</span>
+              <img src="assets/images/munsiyari.jpg" alt="Munsiyari with Panchachuli Himalayan snow peaks" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Munsiyari</h3>
+              <p class="card-description">
+                The majestic basecamp of Panchachuli Peaks, offering Khaliya Top alpine treks, Birthi Falls, and rhododendrons.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">⏱️ 3-5 Days</span>
+                <span class="card-meta-item">🌤️ Mar - Jun, Sep - Nov</span>
+              </div>
+              <div class="card-footer">
+                <a href="destination-munsiyari.html" class="btn btn-secondary btn-sm">Explore Details &rarr;</a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="destinations.html" class="btn btn-primary btn-lg">View All Destination Guides &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding bg-sky-tint">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Student Innovation</span>
+          <h2 class="section-title">Why Travel With Tourism 360?</h2>
+          <p class="section-subtitle">
+            An independent, community-driven digital platform designed to make Himalayan journeys safer, richer, and eco-friendly.
+          </p>
+        </div>
+
+        <div class="card-grid-3">
+          <a href="destinations.html" class="community-feature-card" style="text-decoration: none; display: block;">
+            <div class="community-icon">💎</div>
+            <h3 style="font-size: 1.25rem; color: var(--primary-dark); margin-bottom: 0.6rem;">Discover Hidden Gems</h3>
+            <p style="color: var(--neutral-mid); font-size: 0.95rem;">
+              We highlight remote villages, peaceful trails, and offbeat wonders often missed on mainstream tourism portals.
+            </p>
+          </a>
+
+          <a href="hotels.html" class="community-feature-card" style="text-decoration: none; display: block;">
+            <div class="community-icon">🏡</div>
+            <h3 style="font-size: 1.25rem; color: var(--primary-dark); margin-bottom: 0.6rem;">Verified Homestays</h3>
+            <p style="color: var(--neutral-mid); font-size: 0.95rem;">
+              Direct connection with local host families offering warm Himalayan hospitality and traditional home-cooked meals.
+            </p>
+          </a>
+
+          <a href="trip-planner.html" class="community-feature-card" style="text-decoration: none; display: block;">
+            <div class="community-icon">🧭</div>
+            <h3 style="font-size: 1.25rem; color: var(--primary-dark); margin-bottom: 0.6rem;">Smart Trip Planner</h3>
+            <p style="color: var(--neutral-mid); font-size: 0.95rem;">
+              Customized day-wise itinerary generation tailored to your budget, travel style, and duration with offline saving.
+            </p>
+          </a>
+
+          <a href="food.html" class="community-feature-card" style="text-decoration: none; display: block;">
+            <div class="community-icon">🍲</div>
+            <h3 style="font-size: 1.25rem; color: var(--primary-dark); margin-bottom: 0.6rem;">Local Pahadi Food</h3>
+            <p style="color: var(--neutral-mid); font-size: 0.95rem;">
+              Explore nutritious traditional cuisine like Bhatt Ki Churkani, Kafuli, Bal Mithai, and Singori with cultural stories.
+            </p>
+          </a>
+
+          <a href="experiences.html" class="community-feature-card" style="text-decoration: none; display: block;">
+            <div class="community-icon">🧗</div>
+            <h3 style="font-size: 1.25rem; color: var(--primary-dark); margin-bottom: 0.6rem;">Adventure & Treks</h3>
+            <p style="color: var(--neutral-mid); font-size: 0.95rem;">
+              Curated guides for high-altitude trekking, paragliding, river activities, birdwatching, and mountain photography.
+            </p>
+          </a>
+
+          <a href="emergency.html" class="community-feature-card" style="text-decoration: none; display: block;">
+            <div class="community-icon">🚨</div>
+            <h3 style="font-size: 1.25rem; color: var(--primary-dark); margin-bottom: 0.6rem;">Emergency Assistance</h3>
+            <p style="color: var(--neutral-mid); font-size: 0.95rem;">
+              Instant access to verified local police, SDRF disaster helplines, high-altitude medical posts, and safety tips.
+            </p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding bg-light">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Tailored Experiences</span>
+          <h2 class="section-title">Travel Your Way</h2>
+          <p class="section-subtitle">
+            Choose what excites you most and discover Uttarakhand through your personal lens.
+          </p>
+        </div>
+
+        <div class="card-grid-4">
+          <a href="experiences.html" class="tourism-card" style="text-align: center; padding: 2rem 1.5rem; text-decoration: none;">
+            <div style="font-size: 2.75rem; margin-bottom: 1rem;">🧗</div>
+            <h4 style="font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 0.35rem;">Adventure</h4>
+            <p style="font-size: 0.88rem; color: var(--neutral-mid);">Rock climbing, zip-lining, and glacier expeditions.</p>
+          </a>
+
+          <a href="experiences.html" class="tourism-card" style="text-align: center; padding: 2rem 1.5rem; text-decoration: none;">
+            <div style="font-size: 2.75rem; margin-bottom: 1rem;">🌲</div>
+            <h4 style="font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 0.35rem;">Nature & Lakes</h4>
+            <p style="font-size: 0.88rem; color: var(--neutral-mid);">Emerald mountain lakes, pine groves, and wildlife.</p>
+          </a>
+
+          <a href="experiences.html" class="tourism-card" style="text-align: center; padding: 2rem 1.5rem; text-decoration: none;">
+            <div style="font-size: 2.75rem; margin-bottom: 1rem;">🛕</div>
+            <h4 style="font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 0.35rem;">Culture & Heritage</h4>
+            <p style="font-size: 0.88rem; color: var(--neutral-mid);">Ancient stone temples, Katyuri history, and folk art.</p>
+          </a>
+
+          <a href="food.html" class="tourism-card" style="text-align: center; padding: 2rem 1.5rem; text-decoration: none;">
+            <div style="font-size: 2.75rem; margin-bottom: 1rem;">🍲</div>
+            <h4 style="font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 0.35rem;">Local Food</h4>
+            <p style="font-size: 0.88rem; color: var(--neutral-mid);">Organic mountain grains, Kumaoni dal, and sweetmeats.</p>
+          </a>
+
+          <a href="experiences.html" class="tourism-card" style="text-align: center; padding: 2rem 1.5rem; text-decoration: none;">
+            <div style="font-size: 2.75rem; margin-bottom: 1rem;">🥾</div>
+            <h4 style="font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 0.35rem;">High Altitude Trekking</h4>
+            <p style="font-size: 0.88rem; color: var(--neutral-mid);">Khaliya Top, Binsar, and Pindari glacier trails.</p>
+          </a>
+
+          <a href="experiences.html" class="tourism-card" style="text-align: center; padding: 2rem 1.5rem; text-decoration: none;">
+            <div style="font-size: 2.75rem; margin-bottom: 1rem;">📷</div>
+            <h4 style="font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 0.35rem;">Photography</h4>
+            <p style="font-size: 0.88rem; color: var(--neutral-mid);">Golden hour alpenglow and Milky Way night skies.</p>
+          </a>
+
+          <a href="hotels.html" class="tourism-card" style="text-align: center; padding: 2rem 1.5rem; text-decoration: none;">
+            <div style="font-size: 2.75rem; margin-bottom: 1rem;">👨‍👩‍👧‍👦</div>
+            <h4 style="font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 0.35rem;">Family & Leisure</h4>
+            <p style="font-size: 0.88rem; color: var(--neutral-mid);">Comfortable lakeside stays and gentle nature walks.</p>
+          </a>
+
+          <a href="experiences.html" class="tourism-card" style="text-align: center; padding: 2rem 1.5rem; text-decoration: none;">
+            <div style="font-size: 2.75rem; margin-bottom: 1rem;">🕉️</div>
+            <h4 style="font-size: 1.2rem; color: var(--primary-dark); margin-bottom: 0.35rem;">Spiritual & Wellness</h4>
+            <p style="font-size: 0.88rem; color: var(--neutral-mid);">Kasar Devi meditation ridge and riverside ashrams.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding bg-dark">
+      <div class="container">
+        <div class="content-sidebar-layout">
+          <div>
+            <span class="section-badge" style="background: rgba(33, 104, 83, 0.4); color: #86efac; border-color: #216853;">Community Tourism</span>
+            <h2 class="section-title" style="color: var(--white);">Support Local Mountain Communities</h2>
+            <p style="color: #cbd5e1; font-size: 1.05rem; margin-bottom: 1.75rem; line-height: 1.7;">
+              Every journey with Tourism 360 aims to channel economic value directly to local villagers, certified mountain guides, women-led handloom weavers, and organic farmers across Uttarakhand.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+              <div style="background: rgba(255, 255, 255, 0.08); padding: 1.25rem; border-radius: 10px; border-left: 3px solid var(--forest-green);">
+                <h4 style="color: var(--white); margin-bottom: 0.3rem;">🧤 Handcrafted Woolens</h4>
+                <p style="font-size: 0.88rem; color: #94a3b8; margin: 0;">Support Munsiyari and Dharchula tribal weavers crafting pure sheep-wool shawls.</p>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.08); padding: 1.25rem; border-radius: 10px; border-left: 3px solid var(--accent-orange);">
+                <h4 style="color: var(--white); margin-bottom: 0.3rem;">🍯 Organic Mountain Produce</h4>
+                <p style="font-size: 0.88rem; color: #94a3b8; margin: 0;">Buy raw Himalayan multiflora honey, hemp seeds, and local pulses directly.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: var(--radius-lg); border: 1px solid rgba(255, 255, 255, 0.15);">
+            <span style="font-size: 2rem; display: block; margin-bottom: 0.5rem;">🌱</span>
+            <h3 style="color: var(--white); font-size: 1.35rem; margin-bottom: 0.75rem;">“Leave Only Footprints”</h3>
+            <ul style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.8; list-style-type: '✓ '; padding-left: 1rem;">
+              <li>Never discard single-use plastic on trekking routes.</li>
+              <li>Conserve water in high-altitude dry zones.</li>
+              <li>Respect local cultural traditions and temple customs.</li>
+              <li>Stay on marked eco-trails to prevent soil erosion.</li>
+            </ul>
+            <a href="travel-guide.html" class="btn btn-outline-white btn-sm" style="margin-top: 1.25rem;">Read Responsible Travel Guide &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding bg-sky-tint" style="text-align: center;"> 
+      <div class="container" style="max-width: 800px;">
+        <span class="section-badge">Free Instant Itinerary</span>
+        <h2 class="section-title">Ready to Plan Your Mountain Getaway?</h2>
+        <p class="section-subtitle" style="margin-bottom: 2rem;">
+          Select your desired Uttarakhand destination, travel duration, and budget. Our smart planner creates a tailored schedule complete with activities, stays, and food recommendations.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="trip-planner.html" class="btn btn-primary btn-lg">Launch Trip Planner</a>
+          <a href="emergency.html" class="btn btn-outline-primary btn-lg">View Safety & Emergency Numbers</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-summary">
+          <a href="index.html" class="navbar-brand">
+            <div class="brand-logo-icon">
+              <img src="assets/icons/logo.svg" alt="Tourism 360 Logo" width="46" height="46">
+            </div>
+            <div class="brand-text-group">
+              <span class="brand-name">Tourism <span>360</span></span>
+              <span class="brand-tagline">Explore More. Experience More.</span>
+            </div>
+          </a>
+          <p>
+            An innovative digital tourism platform connecting travelers with the authentic beauty, culture, homestays, and hidden gems of Uttarakhand.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Explore & Plan</h4>
+          <ul class="footer-links-list">
+            <li><a href="destinations.html">All Destinations</a></li>
+            <li><a href="hotels.html">Hotels & Stays</a></li>
+            <li><a href="experiences.html">Experiences & Treks</a></li>
+            <li><a href="food.html">Local Pahadi Food</a></li>
+            <li><a href="trip-planner.html">Smart Trip Planner</a></li>
+            <li><a href="travel-guide.html">Travel Guidelines</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Regional Guides</h4>
+          <ul class="footer-links-list">
+            <li><a href="destination-nainital.html">Nainital</a></li>
+            <li><a href="destination-pithoragarh.html">Pithoragarh</a></li>
+            <li><a href="destination-bhimtal.html">Bhimtal</a></li>
+            <li><a href="destination-almora.html">Almora</a></li>
+            <li><a href="destination-mukteshwar.html">Mukteshwar</a></li>
+            <li><a href="destination-bageshwar.html">Bageshwar</a></li>
+            <li><a href="destination-dharchula.html">Dharchula</a></li>
+            <li><a href="destination-munsiyari.html">Munsiyari</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Partner / Vendor</h4>
+          <ul class="footer-links-list">
+            <li><a href="vendor-login.html" style="color: var(--accent-orange); font-weight: 700;">🏢 Vendor Login</a></li>
+            <li><a href="vendor-register.html">📝 Register Business</a></li>
+            <li><a href="vendor-dashboard.html">📊 Vendor Dashboard</a></li>
+            <li><a href="vendor-add-listing.html">➕ Add New Listing</a></li>
+            <li><a href="vendor-my-listings.html">📋 My Listings</a></li>
+            <li><a href="vendor-bookings.html">📅 Booking Inquiries</a></li>
+            <li><a href="vendor-profile.html">⚙️ Business Profile</a></li>
+            <li><a href="vendor-settings.html">🔒 Account Settings</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Traveller & Admin</h4>
+          <ul class="footer-links-list">
+            <li><a href="login.html" style="color: #38bdf8; font-weight: 700;">🔑 Traveller Login</a></li>
+            <li><a href="register.html">✨ Create Account</a></li>
+            <li><a href="user-dashboard.html">👤 Traveller Dashboard</a></li>
+            <li><a href="admin-login.html" style="color: #cbd5e1; font-weight: 700;">🛡️ Admin Login</a></li>
+            <li><a href="admin-dashboard.html">⚡ Admin Panel</a></li>
+            <li><a href="about.html">About Project</a></li>
+            <li><a href="contact.html">Contact Helpdesk</a></li>
+            <li><a href="emergency.html" style="color: #fca5a5; font-weight: 700;">🚨 Emergency Help 360</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year">2026</span> <strong>Tourism 360</strong>. All rights reserved.</p>
+        <div class="footer-social-links">
+          <a href="#" class="social-icon-btn" aria-label="Facebook">FB</a>
+          <a href="#" class="social-icon-btn" aria-label="Instagram">IG</a>
+          <a href="#" class="social-icon-btn" aria-label="Twitter / X">X</a>
+          <a href="#" class="social-icon-btn" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to Top">↑</button>
+  <script src="js/main.js"></script>
+  <script src="js/database.js"></script>
+  <script src="js/vendor.js"></script>
+</body>
+</html>

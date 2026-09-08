@@ -1,0 +1,67 @@
+{
+  "dataset_version": "1.0.0",
+  "project": "Tourism 360 - Explore Beyond the Map",
+  "last_updated": "2026-03-09T01:15:00.000Z",
+  "users": [
+    {
+      "id": "usr_501",
+      "name": "Rahul Verma",
+      "email": "rahul.tourist@gmail.com",
+      "password": "tourist123",
+      "phone": "+91 98111 22334",
+      "location": "Delhi / NCR",
+      "interests": "Alpine Treks, Heritage Homestays, Kumaoni Cuisine",
+      "registeredAt": "2026-02-10",
+      "role": "tourist",
+      "totalBookings": 2,
+      "loginHistory": [
+        { "timestamp": "2026-03-08T10:15:00.000Z", "ip": "192.168.1.10", "status": "Success" },
+        { "timestamp": "2026-03-09T00:30:00.000Z", "ip": "192.168.1.10", "status": "Success" }
+      ]
+    },
+    {
+      "id": "usr_502",
+      "name": "Priya Sharma",
+      "email": "priya.sharma@outlook.com",
+      "password": "password123",
+      "phone": "+91 98765 11223",
+      "location": "Chandigarh",
+      "interests": "Lakeside Camping, Stargazing, Photography",
+      "registeredAt": "2026-02-18",
+      "role": "tourist",
+      "totalBookings": 1,
+      "loginHistory": [
+        { "timestamp": "2026-03-07T14:22:00.000Z", "ip": "192.168.1.15", "status": "Success" }
+      ]
+    },
+    {
+      "id": "usr_503",
+      "name": "Amit Negi",
+      "email": "amit.negi@gmail.com",
+      "password": "password123",
+      "phone": "+91 94111 88990",
+      "location": "Dehradun, Uttarakhand",
+      "interests": "Glacier Expeditions, High Altitude Passes",
+      "registeredAt": "2026-02-25",
+      "role": "tourist",
+      "totalBookings": 0,
+      "loginHistory": []
+    }
+  ],
+  "activity_logs": [
+    {
+      "logId": "log_001",
+      "userId": "usr_501",
+      "action": "USER_SIGNIN",
+      "timestamp": "2026-03-09T00:30:00.000Z",
+      "details": "User Rahul Verma signed in successfully"
+    },
+    {
+      "logId": "log_002",
+      "userId": "usr_501",
+      "action": "BOOKING_CREATED",
+      "timestamp": "2026-03-09T00:35:00.000Z",
+      "details": "Booked Heritage Valley Wooden Suite in Nainital"
+    }
+  ]
+}

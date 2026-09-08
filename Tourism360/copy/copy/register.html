@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="auth-page-wrapper">
+
+  <div class="auth-card">
+    <div class="auth-header">
+      <a href="index.html" class="auth-logo">
+        <img src="assets/icons/logo.svg" alt="Tourism 360 Logo">
+        <div class="auth-logo-text">TOURISM <span>360°</span></div>
+      </a>
+      <h1>Create Free Tourist Account</h1>
+      <p>Save trips, track verified homestay bookings, and discover Uttarakhand</p>
+    </div>
+
+    <form id="standaloneRegisterForm">
+      <div class="portal-form-group" style="margin-bottom: 1rem;">
+        <label class="portal-label" for="regName">Your Full Name <span class="required">*</span></label>
+        <input type="text" id="regName" class="portal-input" placeholder="e.g. Rahul Verma" required>
+      </div>
+
+      <div class="portal-form-group" style="margin-bottom: 1rem;">
+        <label class="portal-label" for="regEmail">Email Address <span class="required">*</span></label>
+        <input type="email" id="regEmail" class="portal-input" placeholder="e.g. rahul@example.com" required>
+      </div>
+
+      <div class="portal-form-group" style="margin-bottom: 1rem;">
+        <label class="portal-label" for="regPhone">Mobile Number <span class="required">*</span></label>
+        <input type="tel" id="regPhone" class="portal-input" placeholder="e.g. +91 98765 43210" required>
+      </div>
+
+      <div class="portal-form-group" style="margin-bottom: 1.5rem;">
+        <label class="portal-label" for="regPass">Password <span class="required">*</span></label>
+        <input type="password" id="regPass" class="portal-input" placeholder="Choose a password (min. 6 characters)" required minlength="6">
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1rem; border-radius: 8px;">
+        Register & Enter Website &rarr;
+      </button>
+    </form>
+
+    <div class="disclaimer-banner">
+      Dataset Integration: User profiles and logins are securely registered into the backend system.
+    </div>
+
+    <div class="auth-footer-links">
+      Already registered? <a href="login.html?tab=login">Log In to Your Account</a>
+      <div style="margin-top: 0.5rem;">
+        <a href="index.html" style="color: #64748b; font-size: 0.82rem;">&larr; Back to Tourism 360° Website</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/database.js"></script>
+  <script src="js/vendor.js"></script>
+  <script>
+    document.getElementById("standaloneRegisterForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("regName").value.trim();
+      const email = document.getElementById("regEmail").value.trim();
+      const phone = document.getElementById("regPhone").value.trim();
+      const password = document.getElementById("regPass").value;
+
+      const result = BackendDB.registerUser({
+        name: name,
+        email: email,
+        phone: phone,
+        password: password
+      });
+
+      if (!result.success) {
+        showPortalToast(result.message, "error");
+        setTimeout(() => window.location.href = "login.html?tab=login", 1200);
+        return;
+      }
+
+      showPortalToast("Account created in backend dataset! Redirecting to Home...", "success");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 900);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Settings | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="portal-body">
+
+  <div class="portal-layout">
+    <aside class="portal-sidebar" id="vendorSidebar"></aside>
+
+    <div class="portal-main">
+      <header class="portal-topbar">
+        <div class="portal-topbar-left">
+          <button class="sidebar-toggle-mobile" aria-label="Toggle Navigation">☰</button>
+          <div class="topbar-heading">
+            <h1>Account & Business Settings</h1>
+            <p>Manage notification preferences, seasonality and demo controls</p>
+          </div>
+        </div>
+      </header>
+
+      <main class="portal-content">
+
+        <div class="panel-card" style="max-width: 800px;">
+          <div class="panel-header">
+            <h2 class="panel-title"><span>🏨</span> Business Operating Status</h2>
+          </div>
+
+          <div class="portal-form-group" style="margin-bottom: 1.25rem;">
+            <label class="portal-label">Current Season Availability</label>
+            <select id="settOperatingStatus" class="portal-select">
+              <option value="open">Currently Open & Accepting Tourists</option>
+              <option value="snow_closed">Closed Temporarily for Winter / Snow Season</option>
+              <option value="renovation">Closed for Heritage Renovation</option>
+            </select>
+          </div>
+
+          <div class="portal-form-group" style="margin-bottom: 1.25rem;">
+            <label class="portal-label">Tourist Instant Notification Mode</label>
+            <select id="settNotificationMode" class="portal-select">
+              <option value="sms_email">Instant SMS & Email Alerts</option>
+              <option value="email_only">Daily Email Digest Only</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn btn-primary btn-sm" id="btnSaveBusinessSettings">Save Preferences</button>
+        </div>
+
+        <div class="panel-card" style="max-width: 800px;">
+          <div class="panel-header">
+            <h2 class="panel-title"><span>🔒</span> Security & Password Simulation</h2>
+          </div>
+
+          <form id="changePasswordForm">
+            <div class="portal-form-grid" style="margin-bottom: 1.25rem;">
+              <div class="portal-form-group">
+                <label class="portal-label">Current Password</label>
+                <input type="password" id="currPass" class="portal-input" placeholder="Enter current password" required>
+              </div>
+              <div class="portal-form-group">
+                <label class="portal-label">New Password</label>
+                <input type="password" id="newPass" class="portal-input" placeholder="Enter new password" required minlength="6">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Update Password</button>
+          </form>
+        </div>
+
+        <div class="panel-card" style="max-width: 800px; border-color: #fecaca; background: #fffdfd;">
+          <div class="panel-header">
+            <h2 class="panel-title" style="color: #b91c1c;"><span>⚙️</span> Prototype System Tools</h2>
+          </div>
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 1.25rem;">
+            Reset all vendors, listings, reviews, and bookings back to standard presentation test data.
+          </p>
+          <button type="button" class="btn btn-danger btn-sm" id="btnResetAllDemoData" style="background: #ef4444; color: #ffffff; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer;">
+            Reset Prototype Demo Data
+          </button>
+        </div>
+
+        <div class="disclaimer-banner">
+          Demo portal for prototype purposes. Production deployment would use secure backend authentication and a database.
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/vendor.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const vendor = requireVendorAuth();
+      if (!vendor) return;
+
+      renderVendorSidebar("settings");
+
+      document.getElementById("btnSaveBusinessSettings").addEventListener("click", function() {
+        showPortalToast("Business operating preferences saved.", "success");
+      });
+
+      document.getElementById("changePasswordForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const curr = document.getElementById("currPass").value;
+        const next = document.getElementById("newPass").value;
+
+        if (curr !== vendor.password) {
+          showPortalToast("Current password does not match.", "error");
+          return;
+        }
+
+        vendor.password = next;
+        setCurrentVendor(vendor);
+
+        const allVendors = getStoredVendors();
+        const idx = allVendors.findIndex(v => v.id === vendor.id);
+        if (idx !== -1) {
+          allVendors[idx].password = next;
+          saveStoredVendors(allVendors);
+        }
+
+        showPortalToast("Password changed successfully in localStorage.", "success");
+        document.getElementById("currPass").value = "";
+        document.getElementById("newPass").value = "";
+      });
+
+      document.getElementById("btnResetAllDemoData").addEventListener("click", function() {
+        if (confirm("Reset all prototype data to initial state?")) {
+          resetDemoData();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

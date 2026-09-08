@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotels & Homestays in Uttarakhand | Tourism 360</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="navbar-brand" aria-label="Tourism 360° Home">
+        <div class="brand-logo-icon">
+          <img src="assets/icons/logo.svg" alt="Tourism 360° Logo" width="36" height="36">
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-name">TOURISM <span>360°</span></span>
+          <span class="brand-tagline">Explore More. Experience More.</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="hamburger-box">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <div class="nav-scroll-wrapper">
+          <button type="button" class="nav-scroll-btn nav-scroll-left" aria-label="Scroll navigation left">&#8249;</button>
+          <ul class="nav-links">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="destinations.html">Destinations</a></li>
+            <li class="nav-item"><a href="hotels.html" class="active">Hotels & Stays</a></li>
+            <li class="nav-item"><a href="experiences.html">Experiences</a></li>
+            <li class="nav-item"><a href="food.html">Local Food</a></li>
+            <li class="nav-item"><a href="trip-planner.html">Trip Planner</a></li>
+            <li class="nav-item"><a href="travel-guide.html">Travel Guide</a></li>
+            <li class="nav-item"><a href="about.html">About</a></li>
+          </ul>
+          <button type="button" class="nav-scroll-btn nav-scroll-right" aria-label="Scroll navigation right">&#8250;</button>
+        </div>
+        <div class="nav-actions">
+          <a href="login.html" class="nav-btn-auth" id="navAuthLink">🔑 Login / Sign In</a>
+          <a href="vendor-login.html" class="nav-btn-partner">Partner With Us</a>
+          <a href="contact.html" class="nav-btn-contact">Contact</a>
+          <a href="emergency.html" class="nav-btn-emergency">🚨 Emergency</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-wrapper hero-hotels">
+      <div class="container hero-content">
+        <span class="hero-badge">Authentic Mountain Hospitality</span>
+        <h1 class="hero-title">Hotels, Homestays & Alpine Camps</h1>
+        <p class="hero-subtitle">
+          From warm, family-run Kumaoni homestays in remote villages to tranquil lakeside heritage hotels and pine forest eco-camps—find your ideal mountain sanctuary.
+        </p>
+      </div>
+
+      <div class="mountain-layer"></div>
+      <div class="mountain-divider fill-light">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C150,90 350,-40 500,60 C650,140 900,10 1200,40 L1200,120 L0,120 Z"></path>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section-padding bg-light">
+      <div class="container">
+        
+        <div class="filter-bar">
+          <div class="filter-selects-group">
+            <div>
+              <label for="hotelFilterDest" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--neutral-mid); margin-bottom: 2px;">DESTINATION</label>
+              <select id="hotelFilterDest" class="custom-select">
+                <option value="all">All Destinations</option>
+                <option value="nainital">Nainital</option>
+                <option value="pithoragarh">Pithoragarh</option>
+                <option value="bhimtal">Bhimtal</option>
+                <option value="almora">Almora</option>
+                <option value="mukteshwar">Mukteshwar</option>
+                <option value="bageshwar">Bageshwar</option>
+                <option value="dharchula">Dharchula</option>
+                <option value="munsiyari">Munsiyari</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="hotelFilterType" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--neutral-mid); margin-bottom: 2px;">STAY TYPE</label>
+              <select id="hotelFilterType" class="custom-select">
+                <option value="all">All Stay Types</option>
+                <option value="homestay">Homestays</option>
+                <option value="hotel">Hotels & Lodges</option>
+                <option value="resort">Resorts</option>
+                <option value="camp">Eco Camps & Glamping</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="hotelFilterPrice" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--neutral-mid); margin-bottom: 2px;">PRICE TIER</label>
+              <select id="hotelFilterPrice" class="custom-select">
+                <option value="all">All Price Ranges</option>
+                <option value="budget">Budget (Under ₹1,800)</option>
+                <option value="moderate">Moderate (₹1,800 - ₹3,500)</option>
+                <option value="premium">Premium (Above ₹3,500)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="hotelFilterRating" style="display: block; font-size: 0.78rem; font-weight: 700; color: var(--neutral-mid); margin-bottom: 2px;">RATING</label>
+              <select id="hotelFilterRating" class="custom-select">
+                <option value="0">Any Rating</option>
+                <option value="4.5">★ 4.5 & Above</option>
+                <option value="4.8">★ 4.8 & Above</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <button type="button" class="btn btn-outline-primary btn-sm" id="btnResetHotelFilters">Reset Filters</button>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+          <div id="hotelCountDisplay" style="font-weight: 700; color: var(--primary-dark); font-size: 1rem;">
+            Showing 8 of 8 verified stays
+          </div>
+          <small style="color: #64748b; font-style: italic;">*Sample demonstration listings with authentic regional pricing.</small>
+        </div>
+
+        <div class="card-grid-3" id="hotelCardList">
+
+          <article class="tourism-card hotel-item-card" data-dest="munsiyari" data-type="homestay" data-price="budget" data-rating="5.0">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🏡 Village Homestay</span>
+              <span class="card-tag-right">₹1,800 / night</span>
+              <img src="assets/images/munsiyari-village.jpg" alt="Sarmoli Community Homestay Munsiyari" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange);">📍 Munsiyari, Sarmoli Village</span>
+                <span style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">★ 5.0 (68 reviews)</span>
+              </div>
+              <h3 class="card-title">Sarmoli Community Homestay</h3>
+              <p class="card-description">
+                Stay with local Shauka families facing the majestic Panchachuli snow range. Includes authentic organic home-cooked Kumaoni meals and guided village heritage walks.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">📶 WiFi</span>
+                <span class="card-meta-item">🍲 Home Meals</span>
+                <span class="card-meta-item">🔥 Fireplace</span>
+                <span class="card-meta-item">🏔️ Snow View</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Sarmoli Community Homestay: Inquire with local Sarmoli tourism committee upon arrival.', 'info')">Inquire Stay &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card hotel-item-card" data-dest="nainital" data-type="hotel" data-price="moderate" data-rating="4.8">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🏨 Heritage Hotel</span>
+              <span class="card-tag-right">₹3,200 / night</span>
+              <img src="assets/images/nainital.jpg" alt="Naini Lakeside Heritage Inn Nainital" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange);">📍 Nainital, Mallital</span>
+                <span style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">★ 4.8 (142 reviews)</span>
+              </div>
+              <h3 class="card-title">Naini Lakeside Heritage Inn</h3>
+              <p class="card-description">
+                A charming colonial-era property situated along Mallital promenade with private balconies overlooking the tranquil Naini Lake and evening city lights.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">🚣 Lakeside</span>
+                <span class="card-meta-item">☕ Breakfast</span>
+                <span class="card-meta-item">🚗 Parking</span>
+                <span class="card-meta-item">📶 High-Speed WiFi</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Naini Lakeside Heritage: Direct contact numbers available in destination guide.', 'info')">Inquire Stay &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card hotel-item-card" data-dest="bhimtal" data-type="camp" data-price="moderate" data-rating="4.9">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">⛺ Eco Glamping</span>
+              <span class="card-tag-right">₹2,200 / night</span>
+              <img src="assets/images/bhimtal.jpg" alt="Sattal Pineforest Eco-Camp Bhimtal" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange);">📍 Bhimtal, Sattal Valley</span>
+                <span style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">★ 4.9 (95 reviews)</span>
+              </div>
+              <h3 class="card-title">Sattal Pineforest Eco-Camp</h3>
+              <p class="card-description">
+                Luxury safari tents tucked in virgin oak and pine canopies right beside Sattal’s emerald lakes. Features nighttime campfire stargazing and kayak rentals.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">🔥 Campfire</span>
+                <span class="card-meta-item">🛶 Kayaking</span>
+                <span class="card-meta-item">🦅 Bird Trails</span>
+                <span class="card-meta-item">🚿 Attached Baths</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Sattal Eco-Camp: Advance booking recommended for weekend trips.', 'info')">Inquire Stay &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card hotel-item-card" data-dest="almora" data-type="homestay" data-price="moderate" data-rating="4.9">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🏡 Eco Lodge</span>
+              <span class="card-tag-right">₹2,400 / night</span>
+              <img src="assets/images/almora.jpg" alt="Kasar Devi Mountain Lodge Almora" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange);">📍 Almora, Crank's Ridge</span>
+                <span style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">★ 4.9 (110 reviews)</span>
+              </div>
+              <h3 class="card-title">Kasar Devi Mountain Lodge</h3>
+              <p class="card-description">
+                Perched on the serene meditation ridge of Kasar Devi, offering traditional stone cottage architecture, yoga decks, and sweeping views of Trishul and Nanda Devi.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">🧘 Yoga Deck</span>
+                <span class="card-meta-item">☕ Herbal Cafe</span>
+                <span class="card-meta-item">📚 Library</span>
+                <span class="card-meta-item">🏔️ Mountain Vista</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Kasar Ridge Lodge: Eco-certified student-partnered stay.', 'info')">Inquire Stay &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card hotel-item-card" data-dest="mukteshwar" data-type="resort" data-price="premium" data-rating="4.8">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🏨 Luxury Resort</span>
+              <span class="card-tag-right">₹4,200 / night</span>
+              <img src="assets/images/mukteshwar.jpg" alt="Mukteshwar Orchard Cliff Resort" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange);">📍 Mukteshwar, Sargakhet</span>
+                <span style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">★ 4.8 (88 reviews)</span>
+              </div>
+              <h3 class="card-title">Mukteshwar Orchard Cliff Resort</h3>
+              <p class="card-description">
+                Nestled inside private apple and apricot groves at 7,500 feet with floor-to-ceiling glass windows framing 180° snow ranges. Fine dining with organic mountain ingredients.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">🍎 Orchard Walks</span>
+                <span class="card-meta-item">🍽️ Fine Dining</span>
+                <span class="card-meta-item">🔥 Bonfire</span>
+                <span class="card-meta-item">📶 Fast WiFi</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Mukteshwar Cliff Resort: Demo listing for student innovation project.', 'info')">Inquire Stay &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card hotel-item-card" data-dest="pithoragarh" data-type="homestay" data-price="budget" data-rating="4.9">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🏡 Alpine Homestay</span>
+              <span class="card-tag-right">₹1,600 / night</span>
+              <img src="assets/images/pithoragarh.jpg" alt="Soar Valley Alpine Homestay Pithoragarh" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange);">📍 Pithoragarh, Chandak Road</span>
+                <span style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">★ 4.9 (54 reviews)</span>
+              </div>
+              <h3 class="card-title">Soar Valley Alpine Homestay</h3>
+              <p class="card-description">
+                A serene traditional stone home located on Chandak ridge overlooking the lush green bowl of Soar Valley. Savor freshly prepared Bhatt Ki Churkani and Mandua Rotis.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">🍲 Local Meals</span>
+                <span class="card-meta-item">☕ Valley View</span>
+                <span class="card-meta-item">🚶 Trek Guide</span>
+                <span class="card-meta-item">🚗 Free Parking</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Soar Valley Homestay: Authentic Kumaoni hospitality.', 'info')">Inquire Stay &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card hotel-item-card" data-dest="bageshwar" data-type="hotel" data-price="budget" data-rating="4.7">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🏨 Riverside Lodge</span>
+              <span class="card-tag-right">₹1,500 / night</span>
+              <img src="assets/images/bageshwar.jpg" alt="Saryu Confluence Heritage Lodge Bageshwar" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange);">📍 Bageshwar, Sangam Road</span>
+                <span style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">★ 4.7 (46 reviews)</span>
+              </div>
+              <h3 class="card-title">Saryu Confluence Heritage Lodge</h3>
+              <p class="card-description">
+                Convenient base for pilgrims visiting Bagnath temple and adventure trekkers preparing for Pindari Glacier expeditions. Clean rooms with river views.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">🌊 Riverside</span>
+                <span class="card-meta-item">🥾 Trek Info</span>
+                <span class="card-meta-item">🍲 Pure Veg Meals</span>
+                <span class="card-meta-item">🚿 Hot Water</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Saryu Lodge: Great basecamp for Pindari Glacier trekkers.', 'info')">Inquire Stay &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tourism-card hotel-item-card" data-dest="dharchula" data-type="homestay" data-price="budget" data-rating="4.8">
+            <div class="card-image-wrap">
+              <span class="card-badge-top">🏡 Frontier Guesthouse</span>
+              <span class="card-tag-right">₹1,600 / night</span>
+              <img src="assets/images/dharchula-bridge.jpg" alt="Kali River Frontier Guesthouse Dharchula" class="card-image-img" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-orange);">📍 Dharchula, Ghat Road</span>
+                <span style="color: #16a34a; font-weight: 700; font-size: 0.9rem;">★ 4.8 (39 reviews)</span>
+              </div>
+              <h3 class="card-title">Kali River Frontier Guesthouse</h3>
+              <p class="card-description">
+                Experience authentic Rung tribal hospitality facing the rushing waters of the Kali River and Nepal hills. Official permit assistance for Adi Kailash pilgrims.
+              </p>
+              <div class="card-meta-list">
+                <span class="card-meta-item">🏔️ Border View</span>
+                <span class="card-meta-item">☕ Butter Tea</span>
+                <span class="card-meta-item">📝 Permit Help</span>
+                <span class="card-meta-item">📶 WiFi</span>
+              </div>
+              <div class="card-footer">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Kali Frontier Guesthouse: Ideal for Vyas Valley & Adi Kailash travelers.', 'info')">Inquire Stay &rarr;</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-summary">
+          <a href="index.html" class="navbar-brand">
+            <div class="brand-logo-icon">
+              <img src="assets/icons/logo.svg" alt="Tourism 360 Logo" width="46" height="46">
+            </div>
+            <div class="brand-text-group">
+              <span class="brand-name">Tourism <span>360</span></span>
+              <span class="brand-tagline">Explore More. Experience More.</span>
+            </div>
+          </a>
+          <p>An innovative digital tourism platform connecting travelers with authentic beauty, homestays, and hidden gems across Uttarakhand.</p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links-list">
+            <li><a href="destinations.html">All Destinations</a></li>
+            <li><a href="hotels.html">Hotels & Stays</a></li>
+            <li><a href="experiences.html">Experiences</a></li>
+            <li><a href="food.html">Local Food</a></li>
+            <li><a href="trip-planner.html">Smart Trip Planner</a></li>
+            <li><a href="vendor-login.html" style="color: var(--accent-orange); font-weight: 700;">Partner / Vendor Portal</a></li>
+            <li><a href="admin-login.html">Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Explore Regions</h4>
+          <ul class="footer-links-list">
+            <li><a href="destination-nainital.html">Nainital</a></li>
+            <li><a href="destination-pithoragarh.html">Pithoragarh</a></li>
+            <li><a href="destination-bhimtal.html">Bhimtal</a></li>
+            <li><a href="destination-almora.html">Almora</a></li>
+            <li><a href="destination-mukteshwar.html">Mukteshwar</a></li>
+            <li><a href="destination-bageshwar.html">Bageshwar</a></li>
+            <li><a href="destination-dharchula.html">Dharchula</a></li>
+            <li><a href="destination-munsiyari.html">Munsiyari</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Support & Safety</h4>
+          <ul class="footer-links-list">
+            <li><a href="emergency.html" style="color: #fca5a5; font-weight: 700;">🚨 Emergency Help 360</a></li>
+            <li><a href="about.html">About Student Project</a></li>
+            <li><a href="contact.html">Contact Helpdesk</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span class="current-year">2026</span> <strong>Tourism 360</strong>. All rights reserved.</p>
+        <div class="footer-social-links">
+          <a href="#" class="social-icon-btn">FB</a>
+          <a href="#" class="social-icon-btn">IG</a>
+          <a href="#" class="social-icon-btn">X</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to Top">↑</button>
+  <script src="js/main.js"></script>
+  <script src="js/database.js"></script>
+  <script src="js/vendor.js"></script>
+  <script src="js/filters.js"></script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Dashboard | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="portal-body">
+
+  <div class="portal-layout">
+    <aside class="portal-sidebar" id="vendorSidebar"></aside>
+
+    <div class="portal-main">
+      <header class="portal-topbar">
+        <div class="portal-topbar-left">
+          <button class="sidebar-toggle-mobile" aria-label="Toggle Navigation">☰</button>
+          <div class="topbar-heading">
+            <h1>Vendor Dashboard</h1>
+            <p id="topbarSubtext">Welcome to your Uttarakhand business hub</p>
+          </div>
+        </div>
+
+        <div class="portal-topbar-right">
+          <a href="vendor-add-listing.html" class="btn btn-primary btn-sm" style="display: flex; align-items: center; gap: 0.35rem;">
+            <span>➕</span> Add New Listing
+          </a>
+        </div>
+      </header>
+
+      <main class="portal-content">
+        
+        <div class="completion-banner">
+          <div class="completion-info">
+            <h3 id="welcomeVendorTitle">Welcome, Local Business Owner</h3>
+            <p id="vendorMetaSubtitle">Hotel / Homestay • Nainital, Uttarakhand</p>
+            <div class="progress-track">
+              <div class="progress-bar" id="profileProgressBar" style="width: 0%;"></div>
+            </div>
+            <span class="progress-text" id="profileProgressText">Profile 0% Complete</span>
+          </div>
+          <div>
+            <a href="vendor-profile.html" class="btn btn-outline-white btn-sm">Complete Profile &rarr;</a>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Total Views</div>
+              <div class="stat-value" id="statViews">1,420</div>
+            </div>
+            <div class="stat-icon blue">👁️</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">My Listings</div>
+              <div class="stat-value" id="statListings">0</div>
+            </div>
+            <div class="stat-icon green">📋</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Total Bookings</div>
+              <div class="stat-value" id="statBookings">0</div>
+            </div>
+            <div class="stat-icon amber">📅</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Avg Rating</div>
+              <div class="stat-value" id="statRating">4.8 ★</div>
+            </div>
+            <div class="stat-icon orange">⭐</div>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title"><span>⚡</span> Quick Management Shortcuts</h2>
+          </div>
+          <div class="portal-form-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+            <a href="vendor-profile.html" style="text-decoration: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: center; color: #0b1f3a; transition: all 0.2s ease;">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏢</div>
+              <strong style="display: block; font-size: 1rem;">My Profile</strong>
+              <small style="color: #64748b;">Edit public details & photos</small>
+            </a>
+            <a href="vendor-add-listing.html" style="text-decoration: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: center; color: #0b1f3a; transition: all 0.2s ease;">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">➕</div>
+              <strong style="display: block; font-size: 1rem;">Add Listing</strong>
+              <small style="color: #64748b;">Publish rooms, treks, food</small>
+            </a>
+            <a href="vendor-my-listings.html" style="text-decoration: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: center; color: #0b1f3a; transition: all 0.2s ease;">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">📋</div>
+              <strong style="display: block; font-size: 1rem;">My Listings</strong>
+              <small style="color: #64748b;">Track approvals & status</small>
+            </a>
+            <a href="vendor-bookings.html" style="text-decoration: none; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: center; color: #0b1f3a; transition: all 0.2s ease;">
+              <div style="font-size: 2rem; margin-bottom: 0.5rem;">📅</div>
+              <strong style="display: block; font-size: 1rem;">Bookings</strong>
+              <small style="color: #64748b;">Manage customer requests</small>
+            </a>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title"><span>📅</span> Recent Booking Requests</h2>
+            <a href="vendor-bookings.html" class="btn-action-sm btn-action-outline">View All Bookings &rarr;</a>
+          </div>
+          <div class="portal-table-wrap">
+            <table class="portal-table">
+              <thead>
+                <tr>
+                  <th>Customer Name</th>
+                  <th>Service / Listing</th>
+                  <th>Travel Date</th>
+                  <th>Guests</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentBookingsTableBody">
+                <tr>
+                  <td colspan="6" style="text-align: center; color: #64748b; padding: 2rem;">No booking requests found.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title"><span>⭐</span> Recent Tourist Reviews</h2>
+          </div>
+          <div id="vendorReviewsContainer">
+            <p style="color: #64748b; margin: 0;">Loading reviews...</p>
+          </div>
+        </div>
+
+        <div class="disclaimer-banner">
+          Demo portal for prototype purposes. Production deployment would use secure backend authentication and a database.
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/vendor.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const vendor = requireVendorAuth();
+      if (!vendor) return;
+
+      renderVendorSidebar("dashboard");
+
+      document.getElementById("welcomeVendorTitle").textContent = "Welcome, " + (vendor.name || vendor.businessName);
+      document.getElementById("vendorMetaSubtitle").textContent = (vendor.businessType || "Local Partner") + " • " + (vendor.city || vendor.district || "Uttarakhand");
+
+      const completion = calculateProfileCompletion(vendor);
+      document.getElementById("profileProgressBar").style.width = completion + "%";
+      document.getElementById("profileProgressText").textContent = "Profile " + completion + "% Complete";
+
+      const allListings = getStoredListings();
+      const myListings = allListings.filter(l => l.vendorId === vendor.id);
+      document.getElementById("statListings").textContent = myListings.length;
+
+      const allBookings = getStoredBookings();
+      const myBookings = allBookings.filter(b => b.vendorId === vendor.id);
+      document.getElementById("statBookings").textContent = myBookings.length;
+
+      const allReviews = getStoredReviews();
+      const myReviews = allReviews.filter(r => r.vendorId === vendor.id);
+      if (myReviews.length > 0) {
+        const avg = (myReviews.reduce((sum, r) => sum + r.rating, 0) / myReviews.length).toFixed(1);
+        document.getElementById("statRating").textContent = avg + " ★";
+      } else {
+        document.getElementById("statRating").textContent = "5.0 ★";
+      }
+
+      const bookingsTbody = document.getElementById("recentBookingsTableBody");
+      if (myBookings.length > 0) {
+        bookingsTbody.innerHTML = myBookings.slice(0, 5).map(b => `
+          <tr>
+            <td><strong>${b.customerName}</strong><br><small style="color: #64748b;">${b.customerPhone || ''}</small></td>
+            <td>${b.listingTitle}</td>
+            <td>${b.date}</td>
+            <td>${b.guests} People</td>
+            <td><strong>${b.amount}</strong></td>
+            <td><span class="badge-status ${b.status.toLowerCase()}">${b.status}</span></td>
+          </tr>
+        `).join("");
+      } else {
+        bookingsTbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #64748b; padding: 2rem;">No booking requests received yet.</td></tr>`;
+      }
+
+      const reviewsContainer = document.getElementById("vendorReviewsContainer");
+      if (myReviews.length > 0) {
+        reviewsContainer.innerHTML = myReviews.map(r => `
+          <div style="padding: 1rem 0; border-bottom: 1px solid #f1f5f9;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+              <strong>${r.customerName}</strong>
+              <span style="color: #ea580c; font-weight: 700;">${'★'.repeat(Math.round(r.rating))} (${r.rating})</span>
+            </div>
+            <p style="margin: 0 0 0.35rem 0; font-size: 0.9rem; color: #334155;">"${r.comment}"</p>
+            <small style="color: #94a3b8;">${r.date}</small>
+          </div>
+        `).join("");
+      } else {
+        reviewsContainer.innerHTML = `<p style="color: #64748b; margin: 0;">No reviews received yet.</p>`;
+      }
+    });
+  </script>
+</body>
+</html>

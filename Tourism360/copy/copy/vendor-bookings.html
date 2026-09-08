@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Bookings | Tourism 360°</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vendor.css">
+</head>
+<body class="portal-body">
+
+  <div class="portal-layout">
+    <aside class="portal-sidebar" id="vendorSidebar"></aside>
+
+    <div class="portal-main">
+      <header class="portal-topbar">
+        <div class="portal-topbar-left">
+          <button class="sidebar-toggle-mobile" aria-label="Toggle Navigation">☰</button>
+          <div class="topbar-heading">
+            <h1>Customer Booking Requests</h1>
+            <p>Review, confirm, and manage reservations from travellers across Uttarakhand</p>
+          </div>
+        </div>
+
+        <div class="portal-topbar-right">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnSimulateBooking">
+            <span>✨</span> Simulate New Tourist Booking
+          </button>
+        </div>
+      </header>
+
+      <main class="portal-content">
+
+        <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Pending Requests</div>
+              <div class="stat-value" id="countPendingBookings" style="color: #b45309;">0</div>
+            </div>
+            <div class="stat-icon amber">⏳</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Confirmed Bookings</div>
+              <div class="stat-value" id="countConfirmedBookings" style="color: #16a34a;">0</div>
+            </div>
+            <div class="stat-icon green">✓</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Total Volume</div>
+              <div class="stat-value" id="countTotalAmount">₹0</div>
+            </div>
+            <div class="stat-icon blue">💰</div>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-header">
+            <h2 class="panel-title"><span>📅</span> Reservation Requests Table</h2>
+          </div>
+
+          <div class="portal-table-wrap">
+            <table class="portal-table">
+              <thead>
+                <tr>
+                  <th>Customer Details</th>
+                  <th>Service / Listing Requested</th>
+                  <th>Travel Date</th>
+                  <th>Guests</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bookingsTableBody">
+                <tr>
+                  <td colspan="7" style="text-align: center; color: #64748b; padding: 2.5rem;">Loading bookings...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="disclaimer-banner">
+          Prototype Simulation: Local businesses receive direct bookings with instant status updates in localStorage without payment gateway fees.
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/vendor.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const vendor = requireVendorAuth();
+      if (!vendor) return;
+
+      renderVendorSidebar("bookings");
+
+      function loadBookings() {
+        const allBookings = getStoredBookings();
+        const myBookings = allBookings.filter(b => b.vendorId === vendor.id);
+
+        let pendingCount = 0;
+        let confirmedCount = 0;
+        let totalVal = 0;
+
+        myBookings.forEach(b => {
+          if (b.status === "Pending") pendingCount++;
+          if (b.status === "Confirmed") confirmedCount++;
+          const numeric = parseInt((b.amount || "0").replace(/[^0-9]/g, "")) || 0;
+          totalVal += numeric;
+        });
+
+        document.getElementById("countPendingBookings").textContent = pendingCount;
+        document.getElementById("countConfirmedBookings").textContent = confirmedCount;
+        document.getElementById("countTotalAmount").textContent = "₹" + totalVal.toLocaleString("en-IN");
+
+        const tbody = document.getElementById("bookingsTableBody");
+        if (myBookings.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7" style="text-align: center; color: #64748b; padding: 3rem 1rem;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📅</div>
+                <strong>No customer booking requests yet.</strong>
+                <p style="margin: 0.5rem 0 1rem 0; font-size: 0.88rem;">Once tourists book your stay or experiences from Tourism 360°, they will appear here.</p>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="simulateNewBooking()">Simulate Sample Booking</button>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = myBookings.map(b => {
+          const statusClass = (b.status || "pending").toLowerCase();
+          const isPending = (b.status === "Pending");
+          return `
+            <tr>
+              <td>
+                <strong>${b.customerName}</strong>
+                <div style="font-size: 0.8rem; color: #64748b;">✉️ ${b.customerEmail || 'tourist@gmail.com'}</div>
+                <div style="font-size: 0.8rem; color: #64748b;">📞 ${b.customerPhone || '+91 98XXX XXXXX'}</div>
+              </td>
+              <td><strong>${b.listingTitle}</strong></td>
+              <td>🗓️ ${b.date}</td>
+              <td>👥 ${b.guests} Guests</td>
+              <td><strong style="color: #0b1f3a;">${b.amount}</strong></td>
+              <td><span class="badge-status ${statusClass}">${b.status}</span></td>
+              <td>
+                <div class="table-actions">
+                  ${isPending ? `
+                    <button type="button" class="btn-action-sm btn-action-success" onclick="changeStatus('${b.id}', 'Confirmed')">✓ Confirm</button>
+                    <button type="button" class="btn-action-sm btn-action-danger" onclick="changeStatus('${b.id}', 'Cancelled')">✕ Reject</button>
+                  ` : `
+                    <button type="button" class="btn-action-sm btn-action-outline" onclick="changeStatus('${b.id}', 'Completed')">Mark Completed</button>
+                  `}
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      window.changeStatus = function(id, newStatus) {
+        const allBookings = getStoredBookings();
+        const item = allBookings.find(b => b.id === id);
+        if (item) {
+          item.status = newStatus;
+          saveStoredBookings(allBookings);
+          showPortalToast(`Booking status updated to ${newStatus}`, "success");
+          loadBookings();
+        }
+      };
+
+      window.simulateNewBooking = function() {
+        const sampleNames = ["Vikram Aditya", "Neha Sharma", "Rajat Pant", "Meera Bhatt", "Ankit Goswami"];
+        const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+        const futureDate = new Date();
+        futureDate.setDate(futureDate.getDate() + Math.floor(Math.random() * 10) + 2);
+
+        const newBk = {
+          id: "bk_" + Date.now(),
+          vendorId: vendor.id,
+          listingTitle: vendor.businessName || "Mountain Stay & Tour",
+          customerName: randomName,
+          customerEmail: randomName.toLowerCase().replace(" ", ".") + "@example.com",
+          customerPhone: "+91 98" + Math.floor(10000000 + Math.random() * 90000000),
+          date: futureDate.toISOString().split("T")[0],
+          guests: Math.floor(Math.random() * 4) + 1,
+          amount: "₹" + ((Math.floor(Math.random() * 3) + 2) * 2200).toLocaleString("en-IN"),
+          status: "Pending",
+          createdAt: new Date().toISOString().split("T")[0]
+        };
+
+        const all = getStoredBookings();
+        all.unshift(newBk);
+        saveStoredBookings(all);
+        showPortalToast("Sample tourist booking simulated successfully!", "success");
+        loadBookings();
+      };
+
+      document.getElementById("btnSimulateBooking").addEventListener("click", simulateNewBooking);
+
+      loadBookings();
+    });
+  </script>
+</body>
+</html>
