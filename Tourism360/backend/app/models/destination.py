@@ -9,4 +9,4 @@ class Destination(Base):
     city = Column(String(100), nullable=False, index=True)
     description = Column(Text, nullable=True)
     image_url = Column(String(1000), nullable=True)
-    category = Column(String(100), nullable=True)
+    category = Column(String(100), nullable=True)  

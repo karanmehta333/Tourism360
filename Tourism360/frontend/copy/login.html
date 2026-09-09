@@ -184,6 +184,29 @@
     if (btnCloseDataset) btnCloseDataset.addEventListener("click", () => datasetModal.style.display = "none");
     if (btnCloseDataset2) btnCloseDataset2.addEventListener("click", () => datasetModal.style.display = "none");
 
+    function isValidGmail(email) {
+      if (!email || typeof email !== "string") return false;
+      const trimmed = email.trim().toLowerCase();
+      const gmailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|googlemail\.com)$/;
+      if (!gmailRegex.test(trimmed)) return false;
+      if (trimmed.includes("..")) return false;
+      const parts = trimmed.split("@");
+      if (parts.length !== 2) return false;
+      const [localPart] = parts;
+      if (!localPart) return false;
+      if (localPart.startsWith(".") || localPart.endsWith(".")) return false;
+      return true;
+    }
+
+    const isValidEmail = isValidGmail;
+
+    function isValidPhone(phone) {
+      if (!phone || typeof phone !== "string") return false;
+      const cleaned = phone.trim().replace(/[\s\-()]/g, "");
+      const phoneRegex = /^(?:\+91|91|0)?[6-9]\d{9}$/;
+      return phoneRegex.test(cleaned);
+    }
+
     formRegister.addEventListener("submit", function(e) {
       e.preventDefault();
 
@@ -192,6 +215,18 @@
       const phone = document.getElementById("uRegPhone").value.trim();
       const city = document.getElementById("uRegCity").value.trim();
       const password = document.getElementById("uRegPassword").value;
+
+      if (!isValidGmail(email)) {
+        showPortalToast("Please enter a valid Gmail address (e.g. rahul.tourist@gmail.com).", "error");
+        document.getElementById("uRegEmail").focus();
+        return;
+      }
+
+      if (!isValidPhone(phone)) {
+        showPortalToast("Please enter a valid phone number (e.g. +91 98765 43210).", "error");
+        document.getElementById("uRegPhone").focus();
+        return;
+      }
 
       const result = BackendDB.registerUser({
         name: name,
@@ -219,10 +254,26 @@
     formLogin.addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const email = document.getElementById("uLoginEmail").value.trim();
+      const credential = document.getElementById("uLoginEmail").value.trim();
       const password = document.getElementById("uLoginPassword").value;
 
-      const result = BackendDB.loginUser(email, password);
+      const isEmailAttempt = credential.includes("@") || /[a-zA-Z]/.test(credential);
+
+      if (isEmailAttempt) {
+        if (!isValidGmail(credential)) {
+          showPortalToast("Please enter a valid Gmail address (e.g. rahul.tourist@gmail.com).", "error");
+          document.getElementById("uLoginEmail").focus();
+          return;
+        }
+      } else {
+        if (!isValidPhone(credential)) {
+          showPortalToast("Please enter a valid phone number.", "error");
+          document.getElementById("uLoginEmail").focus();
+          return;
+        }
+      }
+
+      const result = BackendDB.loginUser(credential, password);
 
       if (result.success) {
         showPortalToast("Login successful! Redirecting to Home Page, " + result.user.name, "success");
